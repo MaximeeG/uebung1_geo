@@ -1,5 +1,6 @@
 from netCDF4 import Dataset
 import numpy as np
+import matplotlib.pyplot as plt
 
 # Variables:
 # range_water_20_ku
@@ -58,19 +59,6 @@ def linear_interpolation(y1, y2, steps):
     
     return y_vals
 
-# only works when adding values at the end of the list:
-def insert_after_value(main_list, insert_list, start_value):
-    try:
-        index = main_list.index(start_value)
-        return (
-            main_list[:index + 1] +
-            insert_list +
-            main_list[index + 1:]
-        )
-    except ValueError:
-        print(f"Value {start_value} not found in list.")
-        return main_list
-
 def fill_points(data):
 
     data_size = len(data)
@@ -89,7 +77,6 @@ def fill_points(data):
         # data_20.append(1111111)
         iterator += 1
     
-    print(len(data_20))
     return data_20
 
 # the algorithm above is not great, and the resulting lists aren't exactly the same size. I will pop the extra values from the interpolated list
@@ -103,4 +90,21 @@ def interpolate20(data):
 
     return data20
 
+# First calculation: Corrected range = Range + Wet Tropo Correction + Dry Tropo Correction + Iono Correction
 
+wet_cor_20 = interpolate20(wet_cor_01)
+dry_cor_20 = interpolate20(dry_cor_01)
+iono_cor_20 = interpolate20(iono_cor_01)
+
+range_cor = []
+
+for i in range(len(range_w)):
+    range_cor.append(range_w[i] + wet_cor_20[i] + dry_cor_20[i] + iono_cor_20[i])
+
+# plot:
+x_axis = list(range(len(range_w)))
+
+plt.plot(x_axis, range_w, label="Range")
+plt.plot(x_axis, range_cor, label="Corrected Range")
+
+plt.show()
