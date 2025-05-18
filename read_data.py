@@ -51,12 +51,11 @@ def linear_interpolation(y1, y2, steps):
     x1 = 1
     x2 = steps
 
-    for i in range(steps):
+    for i in range(steps - 1):
         y = y1 + ((x - x1)/(x2 - x1))*(y2 - y1)
         y_vals.append(y)
         x += 1
     
-    print(y_vals)
     return y_vals
 
 # only works when adding values at the end of the list:
@@ -76,24 +75,32 @@ def fill_points(data):
 
     data_size = len(data)
     iterator = 0
-    iterator_20 = 0
     data_20 = []
-
+    
     for i in range(data_size - 1):
-
-        data_20[iterator_20].append(data[iterator])
+        
+        data_20.append(data[iterator])
         
         first_val = data[iterator]
         second_val = data[iterator+1]
         insertion_vals = linear_interpolation(first_val, second_val, num_steps)
         
-        iterator_20 += 1
-        insert_after_value(data_20, insertion_vals, iterator_20)
-
+        data_20.extend(insertion_vals)
+        # data_20.append(1111111)
         iterator += 1
-        iterator_20 += num_steps
     
-    print(data_20)
+    print(len(data_20))
     return data_20
 
-fill_points(dry_cor_01)
+# the algorithm above is not great, and the resulting lists aren't exactly the same size. I will pop the extra values from the interpolated list
+def interpolate20(data):
+
+    data20_temp = fill_points(data)
+
+    overshoot = len(data20_temp) - len(range_w)
+
+    data20 = data20_temp[:len(data20_temp)-overshoot]
+
+    return data20
+
+
