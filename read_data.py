@@ -25,6 +25,22 @@ def to_list(var):
     # Convert the ndarray to a (possibly nested) Python list
     return a.tolist()
 
+# x1 = 1
+# x2 = steps
+# x = current point
+def linear_interpolation(y1, y2, steps):
+    
+    y_vals = []
+    x = 1
+    x1 = 1
+    x2 = steps
+
+    for i in range(steps - 1):
+        y = y1 + ((x - x1)/(x2 - x1))*(y2 - y1)
+        y_vals.append(y)
+        x += 1
+    
+    return y_vals
 
 range_w = to_list("range_water_20_ku")
 lat = to_list("lat_20_ku")
@@ -49,12 +65,19 @@ def create_list_20(data_01, total_len):
     for i in range(len(empty_20)):
         counter += 1
 
-        if counter == num_steps:
+        if (counter == num_steps) or (i == 0):
             if selector >= len(data_01):
                 break
             empty_20[i] = data_01[selector]
             selector += 1
             counter = 0
+
+        # if i <= len(data_01) - 2:
+        #     insertion_vals = linear_interpolation(data_01[i], data_01[i+1], num_steps)
+        #     j = 0
+        #     for j in range(num_steps - 1):
+        #         empty_20[i + j] = insertion_vals[j] 
+
     return empty_20
 
 wet_cor_20 = create_list_20(wet_cor_01, len(range_w))
@@ -83,22 +106,7 @@ step_size = len(wet_cor_01)
 
 num_steps = int(np.round((cycle_size/step_size), decimals=0))
 
-# x1 = 1
-# x2 = steps
-# x = current point
-def linear_interpolation(y1, y2, steps):
-    
-    y_vals = []
-    x = 1
-    x1 = 1
-    x2 = steps
 
-    for i in range(steps - 1):
-        y = y1 + ((x - x1)/(x2 - x1))*(y2 - y1)
-        y_vals.append(y)
-        x += 1
-    
-    return y_vals
 
 def fill_points(data):
 
