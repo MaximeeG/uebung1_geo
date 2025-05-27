@@ -74,7 +74,7 @@ def create_list_20(data_01, total_len):
         interpolated = np.copy(npdata)
         interpolated = np.interp(np.arange(len(npdata)), nonzero_indices, npdata[nonzero_indices])
         
-    return interpolated
+    return interpolated.tolist()
 
 range_w_20 = to_list("range_water_20_ku")
 lat_20 = to_list("lat_20_ku")
@@ -82,6 +82,26 @@ wet_cor_01 = to_list("mod_wet_tropo_cor_meas_altitude_01")
 dry_cor_01 = to_list("mod_dry_tropo_cor_meas_altitude_01")
 iono_cor_01 = to_list("iono_cor_gim_01_ku")
 
-wet_cor_20 = create_list_20(wet_cor_01, len(range_w_20))
-dry_cor_20 = create_list_20(dry_cor_01, len(range_w_20))
-iono_cor_20 = create_list_20(iono_cor_01, len(range_w_20))
+ds_size = len(range_w_20)
+
+wet_cor_20 = create_list_20(wet_cor_01, ds_size)
+dry_cor_20 = create_list_20(dry_cor_01, ds_size)
+iono_cor_20 = create_list_20(iono_cor_01, ds_size)
+
+
+# CALCULATE CORRECTED RANGE
+# range_cor = range + wet_cor + dry_cor + iono_cor
+range_cor = []
+skipped_count = 0
+for i in range(ds_size):
+    if str(range_w_20[i]) == "nan" or str(wet_cor_20[i]) == "nan" or str(dry_cor_20[i]) == "nan" or str(iono_cor_20[i]) == "nan":
+        skipped_count += 1
+    else:
+        range_cor.append(range_w_20[i] + wet_cor_20[i] + dry_cor_20[i] + iono_cor_20[i])
+
+print(f"{skipped_count} out of {ds_size} were skipped due to containing a NaN entry.")
+
+with open("range_cor.csv", "w") as f_export:
+    f_export.write("Latitude,CorrectedRange,Range,WetTropoCorrection,DryTropoCorrection,IonoCorrection\n")
+    for i in range(ds_size):
+        f_export.write(f"{lat_20[i]},empty,{range_w_20[i]},{wet_cor_20[i]},{dry_cor_20[i]},{iono_cor_20}\n")
