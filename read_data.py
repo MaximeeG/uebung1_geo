@@ -74,6 +74,7 @@ def create_list_20(data_01, total_len):
         interpolated = np.copy(npdata)
         interpolated = np.interp(np.arange(len(npdata)), nonzero_indices, npdata[nonzero_indices])
         
+    
     return interpolated.tolist()
 
 range_w_20 = to_list("range_water_20_ku")
@@ -81,27 +82,61 @@ lat_20 = to_list("lat_20_ku")
 wet_cor_01 = to_list("mod_wet_tropo_cor_meas_altitude_01")
 dry_cor_01 = to_list("mod_dry_tropo_cor_meas_altitude_01")
 iono_cor_01 = to_list("iono_cor_gim_01_ku")
+print("Data loaded.")
 
 ds_size = len(range_w_20)
 
+print("Interpolating to Wet Tropo Correction to 20GHz...")
 wet_cor_20 = create_list_20(wet_cor_01, ds_size)
+print("Interpolating to Dry Tropo Correction to 20GHz...")
 dry_cor_20 = create_list_20(dry_cor_01, ds_size)
+print("Interpolating to Iono Correction to 20GHz...")
 iono_cor_20 = create_list_20(iono_cor_01, ds_size)
+print("Interpolation finished.")
 
+
+# this boolean decides if the entire cycle is processed
+# True: whole cycle
+# False: only the area around the Müggelsee
+write_complete_cycle = False
 
 # CALCULATE CORRECTED RANGE
 # range_cor = range + wet_cor + dry_cor + iono_cor
-range_cor = []
-skipped_count = 0
-for i in range(ds_size):
-    if str(range_w_20[i]) == "nan" or str(wet_cor_20[i]) == "nan" or str(dry_cor_20[i]) == "nan" or str(iono_cor_20[i]) == "nan":
-        skipped_count += 1
-    else:
-        range_cor.append(range_w_20[i] + wet_cor_20[i] + dry_cor_20[i] + iono_cor_20[i])
+with open(f"range_cor_{"local" if write_complete_cycle == False else "global"}.csv", "w") as f_export:
 
-print(f"{skipped_count} out of {ds_size} were skipped due to containing a NaN entry.")
-
-with open("range_cor.csv", "w") as f_export:
     f_export.write("Latitude,CorrectedRange,Range,WetTropoCorrection,DryTropoCorrection,IonoCorrection\n")
-    for i in range(ds_size):
-        f_export.write(f"{lat_20[i]},empty,{range_w_20[i]},{wet_cor_20[i]},{dry_cor_20[i]},{iono_cor_20}\n")
+    
+    if write_complete_cycle == True:
+        range_cor = np.linspace(0, 0, ds_size)
+        skipped_count = 0
+        j = 0
+
+        for i in range(ds_size):
+            # check if any of the list elements are NaN, skip if they are
+            if str(range_w_20[i]) == "nan" or str(wet_cor_20[i]) == "nan" or str(dry_cor_20[i]) == "nan" or str(iono_cor_20[i]) == "nan":
+                skipped_count += 1
+            # if not NaN, perform corrected range calcuation, and write everything to csv file, including the last added corrected range element
+            else:
+                range_cor[j] = (range_w_20[i] + wet_cor_20[i] + dry_cor_20[i] + iono_cor_20[i])
+                f_export.write(f"{lat_20[i]},{range_cor[j]},{range_w_20[i]},{wet_cor_20[i]},{dry_cor_20[i]},{iono_cor_20[i]}\n")
+                j += 1
+    else: 
+        range_cor = np.linspace(0, 0, ds_size)
+        skipped_count = 0
+        j = 0
+
+        for i in range(ds_size):
+            # check if any of the list elements are NaN, skip if they are
+            if str(range_w_20[i]) == "nan" or str(wet_cor_20[i]) == "nan" or str(dry_cor_20[i]) == "nan" or str(iono_cor_20[i]) == "nan":
+                skipped_count += 1
+            # if not NaN, perform corrected range calcuation, and write everything to csv file, including the last added corrected range element
+            elif lat_20[i] >= 52.334067 and lat_20[i] <= 52.471998:
+                range_cor[j] = (range_w_20[i] + wet_cor_20[i] + dry_cor_20[i] + iono_cor_20[i])
+                f_export.write(f"{lat_20[i]},{range_cor[j]},{range_w_20[i]},{wet_cor_20[i]},{dry_cor_20[i]},{iono_cor_20[i]}\n")
+                j += 1
+
+    print("--------------------------")
+    print("Calculation finished, file generated.")
+    print(f"Print entire cycle: {write_complete_cycle}")
+    print(f"{skipped_count} out of {ds_size} were skipped due to containing a NaN entry.")
+    print("--------------------------")
