@@ -4,8 +4,10 @@ import matplotlib.pyplot as plt
 
 # === CONFIGURATION ===
 write_complete_cycle = False  # True = full orbit, False = Müggelsee only
-LAT_MIN = 52.334067
-LAT_MAX = 52.471998
+LATITUDE_MIN = 52.334067
+LATITUDE_MAX = 52.471998
+LONGITUDE_MIN = 13.600
+LONGITUDE_MAX = 13.750
 
 # === LOAD DATASET ===
 ds = Dataset(r"data\S3A_SR_2_LAN_HY_20160324T195805_20160324T203026_20230907T175812_1941_002_171______LN3_R_NT_005.SEN3\standard_measurement.nc")
@@ -15,16 +17,19 @@ def get_variable(name):
     var = ds.variables[name][:]
     return var.filled(np.nan) if np.ma.isMaskedArray(var) else var
 
-# === LOAD VARIABLES ===
+# === LOAD LATITUDE AND LONGITUDE ===
 latitudes = get_variable("lat_20_ku")
+longitudes = get_variable("lon_20_ku")
+
+# === LOAD TIME VARIABLES ===
+time_1ghz = get_variable("time_01")
+time_20ghz = get_variable("time_20_ku")
+
+# === LOAD VARIABLES ===
 range_20ghz = get_variable("range_water_20_ku")
 wet_1ghz = get_variable("mod_wet_tropo_cor_meas_altitude_01")
 dry_1ghz = get_variable("mod_dry_tropo_cor_meas_altitude_01")
 iono_1ghz = get_variable("iono_cor_gim_01_ku")
-
-# === LOAD TIME VARIABLES ===
-time_1ghz = get_variable("time_01")        # 1Hz (low-res corrections)
-time_20ghz = get_variable("time_20_ku")    # 20Hz (high-res measurements)
 
 # === INTERPOLATION FUNCTION (by time) ===
 def interpolate_to_20ghz_by_time(data_1ghz):
@@ -40,8 +45,11 @@ corrected_range = range_20ghz + wet_20ghz + dry_20ghz + iono_20ghz
 
 # === OPTIONAL: FILTER TO MÜGGELSEE AREA ===
 if not write_complete_cycle:
-    mask_local = (latitudes >= LAT_MIN) & (latitudes <= LAT_MAX)
+    mask_local = (  (latitudes >= LATITUDE_MIN) & (latitudes <= LATITUDE_MAX) &
+                    (longitudes >= LONGITUDE_MIN) & (longitudes <= LONGITUDE_MAX))
+    time_20ghz = time_20ghz[mask_local]
     latitudes = latitudes[mask_local]
+    longitudes = longitudes[mask_local]
     range_20ghz = range_20ghz[mask_local]
     wet_20ghz = wet_20ghz[mask_local]
     dry_20ghz = dry_20ghz[mask_local]
@@ -51,13 +59,13 @@ if not write_complete_cycle:
 # === EXPORT TO CSV ===
 csv_name = f"range_cor_{'global' if write_complete_cycle else 'local'}.csv"
 with open(csv_name, "w") as f:
-    f.write("Latitude,CorrectedRange,Range,WetTropoCorrection,DryTropoCorrection,IonoCorrection\n")
+    f.write("Time,Latitude,Longitude,Range,CorrectedRange,WetTropoCorrection,DryTropoCorrection,IonoCorrection\n")
     skipped = 0
-    for lat, rng, wet, dry, iono, corr in zip(latitudes, range_20ghz, wet_20ghz, dry_20ghz, iono_20ghz, corrected_range):
+    for t, lat, lon, rng, corr, wet, dry, iono in zip(time_20ghz, latitudes, longitudes, range_20ghz, corrected_range, wet_20ghz, dry_20ghz, iono_20ghz):
         if any(np.isnan([rng, wet, dry, iono])):
             skipped += 1
             continue
-        f.write(f"{lat},{corr},{rng},{wet},{dry},{iono}\n")
+        f.write(f"{t},{lat}, {lon},{rng:.4f},{corr:.4f},{wet:.4f},{dry:.4f},{iono:.4f}\n")
 
 print("--------------------------")
 print(f"Print entire cycle: {write_complete_cycle}")
