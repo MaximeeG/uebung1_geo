@@ -3,7 +3,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # === CONFIGURATION ===
-write_complete_cycle = False  # True = full orbit, False = Müggelsee only
+write_complete_cycle = True  # True = full orbit, False = Müggelsee only
+show_plots = True            # Toggle to control whether plots are shown
+
 LATITUDE_MIN = 52.33
 LATITUDE_MAX = 52.47
 LONGITUDE_MIN = 13.60
@@ -96,30 +98,72 @@ print(f"{skipped_rng} Range values were skipped due to NaN.")
 print(f"{skipped_llh} LLH entries were skipped due to NaN.\n")
 
 
-# === PLOT: ORIGINAL vs CORRECTED ===
-plt.figure(figsize=(10, 5))
-plt.plot(range_20ghz, label="Original Range (20GHz)")
-plt.plot(corrected_range, label="Corrected Range", linestyle="--")
-plt.xlabel("Measurement Index")
-plt.ylabel("Range (m)")
-plt.title("Original vs Corrected Range")
-plt.legend()
-plt.grid(True)
-plt.tight_layout()
-plt.show()
 
-# === PLOT: DIFFERENCE ===
-range_diff = range_20ghz - corrected_range
+if show_plots:
+    # === PLOT RANGE ORIGINAL vs. CORRECTED ===
+    plt.figure(figsize=(10, 5))
+    plt.plot(range_20ghz, label="Original Range (20GHz)")
+    plt.plot(corrected_range, label="Corrected Range", linestyle="--")
+    plt.xlabel("Measurement Index")
+    plt.ylabel("Range (m)")
+    plt.title("Original vs Corrected Range")
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()
 
-plt.figure(figsize=(10, 5))
-plt.plot(range_diff, label="Difference: Original - Corrected")
-plt.xlabel("Measurement Index")
-plt.ylabel("Difference in Range (m)")
-plt.title("Difference Between Original and Corrected Range")
-plt.legend()
-plt.grid(True)
-plt.tight_layout()
-plt.show()
+    # === PLOT RANGE DIFFERENCE ===
+    range_diff = range_20ghz - corrected_range
+
+    plt.figure(figsize=(10, 5))
+    plt.plot(range_diff, label="Difference: Original - Corrected")
+    plt.xlabel("Measurement Index")
+    plt.ylabel("Difference in Range (m)")
+    plt.title("Difference Between Original and Corrected Range")
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()
+
+    # === PLOT RANGE CORRECTIONS ===
+    plt.figure(figsize=(10, 5))
+    plt.gca().invert_yaxis()
+    plt.plot(wet_20ghz+dry_20ghz+iono_20ghz, label="All Corrections", linestyle='dotted', color='black')
+    plt.plot(dry_20ghz, label="Dry Tropo Correction", color='orange')
+    plt.plot(wet_20ghz, label="Wet Tropo Correction", color='blue')
+    plt.plot(iono_20ghz, label="Ionospheric Correction")
+    plt.xlabel("Measurement Index")
+    plt.ylabel("Correction (m)")
+    plt.title("Atmospheric Corrections Along Flight Path")
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()
+
+    # === PLOT LLH vs. CORRECTED ===
+    plt.figure(figsize=(10, 5))
+    # plt.plot(llh, label="LLH")
+    plt.plot(corrected_llh, label="Corrected LLH")
+    plt.xlabel("Measurement Index")
+    plt.ylabel("Height above Ellipsoid (m)")
+    plt.title("LLH Relative to Reference Ellipsoid")
+    plt.grid(True)
+    plt.legend()
+    plt.tight_layout()
+    plt.show()
+
+    # === PLOT TIDAL CORRECTIONS ===
+    plt.figure(figsize=(10, 5))
+    plt.plot(solid_earth_tide_20ghz + pole_tide_20ghz, label="Total Tidal Correction", linestyle='dotted', color='black')
+    plt.plot(solid_earth_tide_20ghz, label="Solid Earth Tide Correction")
+    plt.plot(pole_tide_20ghz, label="Pole Tide Correction")
+    plt.xlabel("Measurement Index")
+    plt.ylabel("Correction (m)")
+    plt.title("Tidal Corrections Along Flight Path")
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()
 
 
 
