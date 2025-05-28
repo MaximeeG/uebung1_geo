@@ -11,7 +11,7 @@ LONGITUDE_MAX = 13.70
 
 # === LOAD DATASET ===
 ds = Dataset(r"data\S3A_SR_2_LAN_HY_20160324T195805_20160324T203026_20230907T175812_1941_002_171______LN3_R_NT_005.SEN3\standard_measurement.nc")
-print(ds.variables.keys())
+# print(ds.variables.keys())
 
 def get_variable(name):
     var = ds.variables[name][:]
@@ -89,12 +89,12 @@ with open(llh_csv_name, "w") as f_llh:
             continue
         f_llh.write(f"{t},{lat},{lon},{h:.4f},{corh:.4f}\n")
 
-print("--------------------------")
+print("===== INFO =====")
 print(f"Print entire cycle: {write_complete_cycle}")
 print("Calculation finished, file generated.")
 print(f"{skipped_rng} Range values were skipped due to NaN.")
-print(f"{skipped_llh} LLH entries were skipped due to NaN.")
-print("--------------------------")
+print(f"{skipped_llh} LLH entries were skipped due to NaN.\n")
+
 
 # === PLOT: ORIGINAL vs CORRECTED ===
 plt.figure(figsize=(10, 5))
@@ -120,3 +120,20 @@ plt.legend()
 plt.grid(True)
 plt.tight_layout()
 plt.show()
+
+
+
+# === CALCULATE AVERAGE CORRECTIONS ===
+valid_mask = ~np.isnan(wet_20ghz) & ~np.isnan(dry_20ghz) & ~np.isnan(iono_20ghz)
+
+wet_avg = np.nanmean(wet_20ghz[valid_mask])
+dry_avg = np.nanmean(dry_20ghz[valid_mask])
+iono_avg = np.nanmean(iono_20ghz[valid_mask])
+total_avg_correction = wet_avg + dry_avg + iono_avg
+
+print("===== AVERAGE RANGE CORRECTIONS =====")
+print(f"Wet Tropospheric Correction Avg:   {wet_avg:.4f} m")
+print(f"Dry Tropospheric Correction Avg:   {dry_avg:.4f} m")
+print(f"Ionospheric Correction Avg:        {iono_avg:.4f} m")
+print("------------------------------------------")
+print(f"Total Average Range Correction:    {total_avg_correction:.4f} m\n")
