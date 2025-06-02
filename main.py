@@ -3,13 +3,20 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # === CONFIGURATION ===
-write_complete_cycle = True  # True = full orbit, False = Müggelsee only
+write_complete_cycle = True  # True = full orbit, False = Müggelsee and Virtual Station
 show_plots = False            # Toggle to control whether plots are shown
 
+# === Müggelsee ===
 LATITUDE_MIN = 52.33
 LATITUDE_MAX = 52.47
 LONGITUDE_MIN = 13.60
 LONGITUDE_MAX = 13.70
+
+# === Virtual Station ===
+station_lat = (52.4266 + 52.3996) / 2
+station_lon = (13.6435 + 13.6566) / 2
+# Define a small radius around the point
+station_delta = 0.01
 
 # === LOAD DATASET ===
 ds = Dataset(r"data\S3A_SR_2_LAN_HY_20160324T195805_20160324T203026_20230907T175812_1941_002_171______LN3_R_NT_005.SEN3\standard_measurement.nc")
@@ -56,25 +63,42 @@ corrected_llh = llh - solid_earth_tide_20ghz - pole_tide_20ghz
 # === CALCULATE ORTHOMETRIC HEIGHT ===
 orthometric_height = corrected_llh - geoid_20ghz
 
-# === FILTER TO MÜGGELSEE AREA ===
+# === FILTER TO MÜGGELSEE AREA AND VIRTUAL STATION AREA ===
 if not write_complete_cycle:
-    mask_local = (  (latitudes >= LATITUDE_MIN) & (latitudes <= LATITUDE_MAX) &
+    
+    # === FILTER TO VIRTUAL STATION AREA ===
+    station_mask = (
+        (latitudes >= station_lat - station_delta) & (latitudes <= station_lat + station_delta) &
+        (longitudes >= station_lon - station_delta) & (longitudes <= station_lon + station_delta)
+    )
+    
+    station_time = time_20ghz[station_mask]
+    station_latitudes = latitudes[station_mask]
+    station_longitudes = longitudes[station_mask]
+    station_range = range_20ghz[station_mask]
+    station_corr_range = corrected_range[station_mask]
+    station_llh = llh[station_mask]
+    station_corrected_llh = corrected_llh[station_mask]
+    station_ortho = orthometric_height[station_mask]
+    
+    # === FILTER TO MÜGGELSEE AREA ===
+    mueggelsee_mask = (  (latitudes >= LATITUDE_MIN) & (latitudes <= LATITUDE_MAX) &
                     (longitudes >= LONGITUDE_MIN) & (longitudes <= LONGITUDE_MAX))
-    time_20ghz = time_20ghz[mask_local]
-    latitudes = latitudes[mask_local]
-    longitudes = longitudes[mask_local]
-    range_20ghz = range_20ghz[mask_local]
-    wet_20ghz = wet_20ghz[mask_local]
-    dry_20ghz = dry_20ghz[mask_local]
-    iono_20ghz = iono_20ghz[mask_local]
-    corrected_range = corrected_range[mask_local]
-    altitude_20ghz = altitude_20ghz[mask_local] # altitude above the reference ellipsoid
-    solid_earth_tide_20ghz = solid_earth_tide_20ghz[mask_local]
-    pole_tide_20ghz = pole_tide_20ghz[mask_local]
-    llh = llh[mask_local]
-    corrected_llh = corrected_llh[mask_local]
-    geoid_20ghz = geoid_20ghz[mask_local]
-    orthometric_height = orthometric_height[mask_local]
+    time_20ghz = time_20ghz[mueggelsee_mask]
+    latitudes = latitudes[mueggelsee_mask]
+    longitudes = longitudes[mueggelsee_mask]
+    range_20ghz = range_20ghz[mueggelsee_mask]
+    wet_20ghz = wet_20ghz[mueggelsee_mask]
+    dry_20ghz = dry_20ghz[mueggelsee_mask]
+    iono_20ghz = iono_20ghz[mueggelsee_mask]
+    corrected_range = corrected_range[mueggelsee_mask]
+    altitude_20ghz = altitude_20ghz[mueggelsee_mask] # altitude above the reference ellipsoid
+    solid_earth_tide_20ghz = solid_earth_tide_20ghz[mueggelsee_mask]
+    pole_tide_20ghz = pole_tide_20ghz[mueggelsee_mask]
+    llh = llh[mueggelsee_mask]
+    corrected_llh = corrected_llh[mueggelsee_mask]
+    geoid_20ghz = geoid_20ghz[mueggelsee_mask]
+    orthometric_height = orthometric_height[mueggelsee_mask]
 
 # === EXPORT RANGE TO CSV ===
 range_csv_name = f"range_{'global' if write_complete_cycle else 'local'}.csv"
@@ -98,11 +122,30 @@ with open(llh_ortho_csv_name, "w") as f_llh_ortho:
             continue
         f_llh_ortho.write(f"{t},{lat},{lon},{h:.4f},{corh:.4f},{ortho:.4f}\n")
 
+if not write_complete_cycle:
+    # === EXPORT STATION DATA TO CSV ===
+    with open("station.csv", "w") as f_station:
+        f_station.write("Time,Latitude,Longitude,Range,CorrectedRange,LLH,CorrectedLLH,OrthometricHeight\n")
+        skipped_station = 0
+        for t, lat, lon, rng, corr_rng, h, corr_h, ortho in zip(
+            station_time, station_latitudes, station_longitudes,
+            station_range, station_corr_range,
+            station_llh, station_corrected_llh, station_ortho
+        ):
+            if any(np.isnan([rng, corr_rng, h, corr_h, ortho])):
+                skipped_station += 1
+                continue
+            f_station.write(f"{t},{lat},{lon},{rng:.4f},{corr_rng:.4f},{h:.4f},{corr_h:.4f},{ortho:.4f}\n")
+
+
+
 print("===== INFO =====")
 print(f"Print entire cycle: {write_complete_cycle}")
 print("Calculation finished, file generated.")
 print(f"{skipped_rng} Range values were skipped due to NaN.")
-print(f"{skipped_llh} LLH entries were skipped due to NaN.\n")
+print(f"{skipped_llh} LLH entries were skipped due to NaN.")
+if not write_complete_cycle:
+    print(f"{skipped_station} station entries skipped due to NaNs.\n")
 
 
 
@@ -188,6 +231,19 @@ plt.grid(True)
 plt.legend()
 plt.tight_layout()
 save_and_optionally_show(fig, "orthometric_height")
+
+if not write_complete_cycle:
+    # === PLOT CORRECTED VIRTUAL STATION LLH ===
+    fig = plt.figure(figsize=(16, 9))
+    # plt.plot(station_llh, label="LLH")  # Uncomment if you want to include
+    plt.plot(station_corrected_llh, label="Corrected LLH")
+    plt.xlabel("Measurement Index")
+    plt.ylabel("Height above Ellipsoid (m)")
+    plt.title("LLH (Virtual Station) Relative to Reference Ellipsoid")
+    plt.grid(True)
+    plt.legend()
+    plt.tight_layout()
+    save_and_optionally_show(fig, "station_corrected_llh")
 
 
 
