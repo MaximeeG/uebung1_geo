@@ -1,0 +1,1249 @@
+{'time_01': <class 'netCDF4.Variable'>
+float64 time_01(time_01)
+    long_name: UTC: 1 Hz
+    units: seconds since 2000-01-01 00:00:00.0
+    standard_name: time
+    calendar: gregorian
+unlimited dimensions: 
+current shape = (1372,)
+filling on, default _FillValue of 9.969209968386869e+36 used, 'time_20_ku': <class 'netCDF4.Variable'>
+float64 time_20_ku(time_20_ku)
+    long_name: UTC: 20 Hz Ku band
+    units: seconds since 2000-01-01 00:00:00.0
+    standard_name: time
+    calendar: gregorian
+    comment: Datation of SAR mode measurements (or LRM measurements acquired during early commissioning phase)
+unlimited dimensions: 
+current shape = (25093,)
+filling on, default _FillValue of 9.969209968386869e+36 used, 'time_20_c': <class 'netCDF4.Variable'>
+float64 time_20_c(time_20_c)
+    long_name: UTC: 20 Hz C band
+    units: seconds since 2000-01-01 00:00:00.0
+    standard_name: time
+    calendar: gregorian
+    comment: Datation of C-band and Pseudo-LRM measurements
+unlimited dimensions: 
+current shape = (25093,)
+filling on, default _FillValue of 9.969209968386869e+36 used, 'max_multi_stack_ind': <class 'netCDF4.Variable'>
+int16 max_multi_stack_ind(max_multi_stack_ind)
+    long_name: maximum number of multilook beams per stack
+    units: count
+    comment: Set to be compliant with the CF-1.6 convention
+unlimited dimensions: 
+current shape = (256,)
+filling on, default _FillValue of -32767 used, 'UTC_day_01': <class 'netCDF4.Variable'>
+int16 UTC_day_01(time_01)
+    long_name: day UTC : 1 Hz
+    units: days since 2000-01-01 00:00:00.0
+unlimited dimensions: 
+current shape = (1372,)
+filling on, default _FillValue of -32767 used, 'UTC_sec_01': <class 'netCDF4.Variable'>
+float64 UTC_sec_01(time_01)
+    long_name: Second in the day UTC : 1 Hz
+    units: s
+unlimited dimensions: 
+current shape = (1372,)
+filling on, default _FillValue of 9.969209968386869e+36 used, 'UTC_day_20_ku': <class 'netCDF4.Variable'>
+int16 UTC_day_20_ku(time_20_ku)
+    long_name: day UTC : 20 Hz Ku band
+    units: days since 2000-01-01 00:00:00.0
+unlimited dimensions: 
+current shape = (25093,)
+filling on, default _FillValue of -32767 used, 'UTC_sec_20_ku': <class 'netCDF4.Variable'>
+float64 UTC_sec_20_ku(time_20_ku)
+    long_name: Second in the day UTC : 20 Hz Ku band
+    units: s
+unlimited dimensions: 
+current shape = (25093,)
+filling on, default _FillValue of 9.969209968386869e+36 used, 'UTC_day_20_c': <class 'netCDF4.Variable'>
+int16 UTC_day_20_c(time_20_c)
+    long_name: day UTC : 20 Hz C band
+    units: days since 2000-01-01 00:00:00.0
+unlimited dimensions: 
+current shape = (25093,)
+filling on, default _FillValue of -32767 used, 'UTC_sec_20_c': <class 'netCDF4.Variable'>
+float64 UTC_sec_20_c(time_20_c)
+    long_name: Second in the day UTC : 20 Hz C band
+    units: s
+unlimited dimensions: 
+current shape = (25093,)
+filling on, default _FillValue of 9.969209968386869e+36 used, 'UTC_time_1hz_20_ku': <class 'netCDF4.Variable'>
+float64 UTC_time_1hz_20_ku(time_20_ku)
+    long_name: UTC of the 1 Hz measurement
+    units: seconds since 2000-01-01 00:00:00.0
+    calendar: gregorian
+unlimited dimensions: 
+current shape = (25093,)
+filling on, default _FillValue of 9.969209968386869e+36 used, 'UTC_time_1hz_20_c': <class 'netCDF4.Variable'>
+float64 UTC_time_1hz_20_c(time_20_c)
+    long_name: UTC of the 1 Hz measurement
+    units: seconds since 2000-01-01 00:00:00.0
+    calendar: gregorian
+unlimited dimensions: 
+current shape = (25093,)
+filling on, default _FillValue of 9.969209968386869e+36 used, 'lat_01': <class 'netCDF4.Variable'>
+int32 lat_01(time_01)
+    long_name: latitude : 1 Hz
+    units: degrees_north
+    standard_name: latitude
+    add_offset: 0.0
+    scale_factor: 1e-06
+    comment: Positive latitude is North latitude, negative latitude is South latitude
+unlimited dimensions: 
+current shape = (1372,)
+filling on, default _FillValue of -2147483647 used, 'lon_01': <class 'netCDF4.Variable'>
+int32 lon_01(time_01)
+    long_name: longitude : 1 Hz
+    units: degrees_east
+    standard_name: longitude
+    add_offset: 0.0
+    scale_factor: 1e-06
+    comment: East longitude relative to Greenwich meridian
+unlimited dimensions: 
+current shape = (1372,)
+filling on, default _FillValue of -2147483647 used, 'lat_20_ku': <class 'netCDF4.Variable'>
+int32 lat_20_ku(time_20_ku)
+    long_name: latitude : 20 Hz Ku band
+    units: degrees_north
+    standard_name: latitude
+    add_offset: 0.0
+    scale_factor: 1e-06
+    comment: Latitude of SAR mode measurements (or LRM measurements acquired during early commissioning phase). Positive latitude is North latitude, negative latitude is South latitude"
+unlimited dimensions: 
+current shape = (25093,)
+filling on, default _FillValue of -2147483647 used, 'lon_20_ku': <class 'netCDF4.Variable'>
+int32 lon_20_ku(time_20_ku)
+    long_name: longitude : 20 Hz Ku band
+    units: degrees_east
+    standard_name: longitude
+    add_offset: 0.0
+    scale_factor: 1e-06
+    comment: Longitude of SAR mode measurements (or LRM measurements acquired during early commissioning phase) [0,+360]. East longitude relative to Greenwich meridian
+unlimited dimensions: 
+current shape = (25093,)
+filling on, default _FillValue of -2147483647 used, 'lat_20_c': <class 'netCDF4.Variable'>
+int32 lat_20_c(time_20_c)
+    long_name: latitude : 20 Hz C band
+    units: degrees_north
+    standard_name: latitude
+    add_offset: 0.0
+    scale_factor: 1e-06
+    comment: Latitude of C-band and Pseudo-LRM measurements. Positive latitude is North latitude, negative latitude is South latitude
+unlimited dimensions: 
+current shape = (25093,)
+filling on, default _FillValue of -2147483647 used, 'lon_20_c': <class 'netCDF4.Variable'>
+int32 lon_20_c(time_20_c)
+    long_name: longitude : 20 Hz C band
+    units: degrees_east
+    standard_name: longitude
+    add_offset: 0.0
+    scale_factor: 1e-06
+    comment: Longitude of C-band and Pseudo-LRM measurements [0,+360]. East longitude relative to Greenwich meridian
+unlimited dimensions: 
+current shape = (25093,)
+filling on, default _FillValue of -2147483647 used, 'surf_type_20_ku': <class 'netCDF4.Variable'>
+int8 surf_type_20_ku(time_20_ku)
+    _FillValue: 127
+    long_name: surface type : 20 Hz Ku band
+    flag_values: [0 1 2 3]
+    flag_meanings: ocean_or_semi_enclosed_sea enclosed_sea_or_lake continental_ice land
+    coordinates: lon_20_ku lat_20_ku
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'surf_class_01': <class 'netCDF4.Variable'>
+int8 surf_class_01(time_01)
+    long_name: surface classification : 01 Hz 
+    flag_values: [0 1 2 3 4 5 6]
+    flag_meanings: open_ocean land continental_water aquatic_vegetation continental_ice_snow floating_ice salted_basin
+    coordinates: lon_01 lat_01
+    _FillValue: 127
+    comment: A 7-states surface type mask for the surface type at the nadir location. Computed at CLS by combining data from MODIS and GlobCover
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'surf_class_20_ku': <class 'netCDF4.Variable'>
+int8 surf_class_20_ku(time_20_ku)
+    long_name: surface classification : 20 Hz ku band 
+    flag_values: [0 1 2 3 4 5 6]
+    flag_meanings: open_ocean land continental_water aquatic_vegetation continental_ice_snow floating_ice salted_basin
+    coordinates: lon_20_ku lat_20_ku
+    _FillValue: 127
+    comment: A 7-states surface type mask for the surface type at the nadir location. Computed at CLS by combining data from MODIS and GlobCover
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'surf_class_20_c': <class 'netCDF4.Variable'>
+int8 surf_class_20_c(time_20_c)
+    long_name: surface classification : 20 Hz C band 
+    flag_values: [0 1 2 3 4 5 6]
+    flag_meanings: open_ocean land continental_water aquatic_vegetation continental_ice_snow floating_ice salted_basin
+    coordinates: lon_20_c lat_20_c
+    _FillValue: 127
+    comment: A 7-states surface type mask for the surface type at the nadir location. Computed at CLS by combining data from MODIS and GlobCover
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'rad_surf_type_01': <class 'netCDF4.Variable'>
+int8 rad_surf_type_01(time_01)
+    _FillValue: 127
+    long_name: radiometer derived surface type : 1 Hz
+    flag_values: [0 1]
+    flag_meanings: ocean land
+    coordinates: lon_01 lat_01
+    comment: References: Ruf, C.S., 1999a : Jason Microwave Radiometer – Land Contamination of Path Delay Retrieval. 22 February 1999
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'angle_coast_20_ku': <class 'netCDF4.Variable'>
+int16 angle_coast_20_ku(time_20_ku)
+    _FillValue: 32767
+    long_name: angle to the coast : 20 Hz Ku band
+    units: degree
+    add_offset: 0.0
+    scale_factor: 0.01
+    coordinates: lon_20_ku lat_20_ku
+    comment: Angle to the coast extracted from the Global Self-consistent, Hierarchical, High-resolution Geography Database (GSHHG v2.3.7). 0 is parallel to the coast with the land on the right. Positive values indicate the satellite is approaching the land. Negative values indicate the satellite is leaving the land
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'dist_coast_20_ku': <class 'netCDF4.Variable'>
+int32 dist_coast_20_ku(time_20_ku)
+    _FillValue: 2147483647
+    long_name: distance to the coast : 20 Hz Ku band
+    units: m
+    coordinates: lon_20_ku lat_20_ku
+    comment: Distance to the coast extracted from the Global Self-consistent, Hierarchical, High-resolution Geography Database (GSHHG v2.3.7)
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'alt_20_ku': <class 'netCDF4.Variable'>
+int32 alt_20_ku(time_20_ku)
+    _FillValue: 2147483647
+    long_name: altitude of the satellite : 20 Hz Ku band
+    units: m
+    standard_name: height_above_reference_ellipsoid
+    add_offset: 700000.0
+    scale_factor: 0.0001
+    coordinates: lon_20_ku lat_20_ku
+    comment: Altitude of satellite above the reference ellipsoid (WGS 84)
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'alt_20_c': <class 'netCDF4.Variable'>
+int32 alt_20_c(time_20_c)
+    _FillValue: 2147483647
+    long_name: altitude of the satellite : 20 Hz C band
+    units: m
+    standard_name: height_above_reference_ellipsoid
+    add_offset: 700000.0
+    scale_factor: 0.0001
+    coordinates: lon_20_c lat_20_c
+    comment: Altitude of satellite above the reference ellipsoid (WGS 84)
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'range_water_20_ku': <class 'netCDF4.Variable'>
+int32 range_water_20_ku(time_20_ku)
+    _FillValue: 2147483647
+    long_name: corrected altimeter range from SAMOSA ocean retracker: 20 Hz Ku band
+    units: m
+    quality_flag: range_water_qual_20_ku
+    add_offset: 700000.0
+    scale_factor: 0.0001
+    coordinates: lon_20_ku lat_20_ku
+    comment: SAR mode:  SAMOSA retracker (Dinardo et al., 2015, DOI: 10.1109/IGARSS.2015.7327036). Instrumental corrections included : USO drift correction (uso_cor_20_ku), internal path correction (int_path_cor_20_ku), distance antenna-COG (cog_cor_01), Doppler correction (dop_cor_20_ku), modeled instrumental errors correction (mod_instr_cor_range_01_ku) and system bias (for measurements acquired in LRM during early commissioning phase, the MLE4 Brown retracker is used, Amarouche et al., 2004, DOI:  10.1080/01490410490465210)
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'range_water_20_plrm_ku': <class 'netCDF4.Variable'>
+int32 range_water_20_plrm_ku(time_20_c)
+    _FillValue: 2147483647
+    long_name: corrected altimeter range from MLE4 Brown retracker: 20 Hz Plrm Ku band
+    units: m
+    quality_flag: range_water_qual_20_plrm_ku
+    add_offset: 700000.0
+    scale_factor: 0.0001
+    coordinates: lon_20_c lat_20_c
+    comment: Pseudo-LRM only: MLE4 Brown retracker from Amarouche et al. (2004), DOI:  10.1080/01490410490465210. Instrumental corrections included : USO drift correction (uso_cor_20_c), internal path correction (int_path_cor_20_plrm_ku), distance antenna-COG (cog_cor_01), Doppler correction (dop_cor_20_plrm_ku), modeled instrumental errors correction (mod_instr_cor_range_01_plrm_ku) and system bias
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'range_water_qual_20_ku': <class 'netCDF4.Variable'>
+int8 range_water_qual_20_ku(time_20_ku)
+    _FillValue: 127
+    long_name: quality flag for the altimeter range derived from SAMOSA ocean retracker: 20 Hz Ku band
+    flag_values: [0 1]
+    flag_meanings: Yes No
+    coordinates: lon_20_ku lat_20_ku
+    comment: SAR mode: SAMOSA retracker (Dinardo et al., 2015, DOI: 10.1109/IGARSS.2015.7327036). Flag indicating the use or not of the 20-Hz estimate of the ocean altimeter range in the computation of 1Hz estimate
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'range_water_qual_20_plrm_ku': <class 'netCDF4.Variable'>
+int8 range_water_qual_20_plrm_ku(time_20_c)
+    _FillValue: 127
+    long_name: quality flag for the altimeter range derived from the  MLE4 Brown retracker: 20 Hz Plrm Ku band
+    flag_values: [0 1]
+    flag_meanings: Yes No
+    coordinates: lon_20_c lat_20_c
+    comment: Pseudo-LRM only: MLE4 Brown retracker from Amarouche et al. (2004), DOI:  10.1080/01490410490465210. Flag indicating the use or not of the 20-Hz estimate of the ocean altimeter range in the computation of 1Hz estimate
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'sig0_water_20_ku': <class 'netCDF4.Variable'>
+int16 sig0_water_20_ku(time_20_ku)
+    _FillValue: 32767
+    long_name: corrected backscatter coefficient from SAMOSA ocean retracker: 20 Hz Ku band
+    units: dB
+    standard_name: surface_backwards_scattering_coefficient_of_radar_wave
+    quality_flag: sig0_water_qual_20_ku
+    add_offset: 0.0
+    scale_factor: 0.01
+    coordinates: lon_20_ku lat_20_ku
+    comment: SAR mode: SAMOSA retracker (Dinardo et al., 2015, DOI: 10.1109/IGARSS.2015.7327036). Instrumental corrections included : AGC instrumental errors correction (agc_cor_20_ku), internal calibration correction (sig0_cal_20_ku), modeled instrumental errors correction (mod_instr_cor_sig0_01_ku), atmospheric attenuation correction (atm_cor_sig0_01_ku) and system bias (for measurements acquired in LRM during early commissioning phase, the MLE4 Brown retracker is used, Amarouche et al., 2004, DOI:  10.1080/01490410490465210)
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'sig0_water_20_plrm_ku': <class 'netCDF4.Variable'>
+int16 sig0_water_20_plrm_ku(time_20_c)
+    _FillValue: 32767
+    long_name: corrected backscatter coefficient from MLE4 Brown retracker:: 20 Hz Plrm Ku band
+    units: dB
+    standard_name: surface_backwards_scattering_coefficient_of_radar_wave
+    quality_flag: sig0_water_qual_20_plrm_ku
+    add_offset: 0.0
+    scale_factor: 0.01
+    coordinates: lon_20_c lat_20_c
+    comment: Pseudo-LRM only: MLE4 Brown retracker from Amarouche et al. (2004), DOI:  10.1080/01490410490465210. Instrumental corrections included : AGC instrumental errors correction (agc_cor_20_plrm_ku), internal calibration correction (sig0_cal_20_plrm_ku), modeled instrumental errors correction (mod_instr_cor_sig0_01_plrm_ku), atmospheric attenuation correction (atm_cor_sig0_01_plrm_ku) and system bias
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'sig0_water_qual_20_ku': <class 'netCDF4.Variable'>
+int8 sig0_water_qual_20_ku(time_20_ku)
+    _FillValue: 127
+    long_name: quality flag for the backscatter coefficient from SAMOSA ocean/coastal retracker: 20 Hz Ku band
+    flag_values: [0 1]
+    flag_meanings: Yes No
+    coordinates: lon_20_ku lat_20_ku
+    comment: SAR mode: SAMOSA retracker (Dinardo et al., 2015, DOI: 10.1109/IGARSS.2015.7327036). Flag indicating the use or not of the 20-Hz estimate of the 'ocean' backscatter coefficient in the computation of 1Hz estimate (for measurements acquired in LRM during early commissioning phase, the MLE4 Brown retracker is used, Amarouche et al., 2004, DOI:  10.1080/01490410490465210)
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'sig0_water_qual_20_plrm_ku': <class 'netCDF4.Variable'>
+int8 sig0_water_qual_20_plrm_ku(time_20_c)
+    _FillValue: 127
+    long_name: quality flag for the backscatter coefficient from MLE4 Brown retracker: 20 Hz Plrm Ku band
+    flag_values: [0 1]
+    flag_meanings: Yes No
+    coordinates: lon_20_c lat_20_c
+    comment: Pseudo-LRM only: MLE4 Brown retracker from Amarouche et al. (2004), DOI:  10.1080/01490410490465210. Flag indicating the use or not of the 20-Hz estimate of the 'ocean' backscatter coefficient in the computation of 1Hz estimate
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'swh_water_20_ku': <class 'netCDF4.Variable'>
+int16 swh_water_20_ku(time_20_ku)
+    _FillValue: 32767
+    long_name: corrected significant waveheight derived from SAMOSA ocean retracker: 20 Hz Ku band
+    units: m
+    standard_name: sea_surface_wave_significant_height
+    quality_flag: swh_water_qual_20_ku
+    add_offset: 0.0
+    scale_factor: 0.001
+    coordinates: lon_20_ku lat_20_ku
+    comment: SAR mode: SAMOSA retracker (Dinardo et al., 2015, DOI: 10.1109/IGARSS.2015.7327036). Instrumental corrections included : modeled instrumental errors correction (mod_instr_cor_swh_01_ku) and system bias.
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'swh_water_20_plrm_ku': <class 'netCDF4.Variable'>
+int16 swh_water_20_plrm_ku(time_20_c)
+    _FillValue: 32767
+    long_name: corrected significant waveheight derived from MLE4 Brown retracker: 20 Hz Plrm Ku band
+    units: m
+    standard_name: sea_surface_wave_significant_height
+    quality_flag: swh_water_qual_20_plrm_ku
+    add_offset: 0.0
+    scale_factor: 0.001
+    coordinates: lon_20_c lat_20_c
+    comment: Pseudo-LRM only: MLE4 Brown retracker from Amarouche et al. (2004), DOI:  10.1080/01490410490465210. Instrumental corrections included : modeled instrumental errors correction (mod_instr_cor_swh_01_plrm_ku) and system bias.
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'swh_water_qual_20_ku': <class 'netCDF4.Variable'>
+int8 swh_water_qual_20_ku(time_20_ku)
+    _FillValue: 127
+    long_name: quality flag for the significant waveheight from SAMOSA ocean retracker: 20 Hz Ku band
+    flag_values: [0 1]
+    flag_meanings: Yes No
+    coordinates: lon_20_ku lat_20_ku
+    comment: SAR mode: SAMOSA retracker (Dinardo et al., 2015, DOI: 10.1109/IGARSS.2015.7327036). Flag indicating the use or not of the 20-Hz estimate of the 'ocean' significant waveheight in the computation of 1Hz estimate
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'swh_water_qual_20_plrm_ku': <class 'netCDF4.Variable'>
+int8 swh_water_qual_20_plrm_ku(time_20_c)
+    _FillValue: 127
+    long_name: quality flag for the significant waveheight from MLE4 Brown retracker: 20 Hz Plrm Ku band
+    flag_values: [0 1]
+    flag_meanings: Yes No
+    coordinates: lon_20_c lat_20_c
+    comment: Pseudo-LRM only: MLE4 Brown retracker from Amarouche et al. (2004), DOI:  10.1080/01490410490465210. Flag indicating the use or not of the 20-Hz estimate of the 'ocean' significant waveheight in the computation of 1Hz estimate
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'mqe_water_20_ku': <class 'netCDF4.Variable'>
+int32 mqe_water_20_ku(time_20_ku)
+    _FillValue: 2147483647
+    long_name: Mean Quadratic Error (MQE) between waveform and retracking model 20 Hz Ku band
+    units: count
+    add_offset: 0.0
+    scale_factor: 0.0001
+    coordinates: lon_20_ku lat_20_ku
+    comment: SAR mode: SAMOSA retracker (Dinardo et al., 2015, DOI: 10.1109/IGARSS.2015.7327036). (for measurements acquired in LRM during early commissioning phase, the MLE4 Brown retracker is used, Amarouche et al., 2004, DOI:  10.1080/01490410490465210)
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'mqe_water_20_plrm_ku': <class 'netCDF4.Variable'>
+int32 mqe_water_20_plrm_ku(time_20_c)
+    _FillValue: 2147483647
+    long_name: Mean Quadratic Error (MQE) between waveform andretracking model: 20 Hz Plrm Ku band
+    units: count
+    add_offset: 0.0
+    scale_factor: 0.0001
+    coordinates: lon_20_c lat_20_c
+    comment: Pseudo-LRM only: MLE4 Brown retracker from Amarouche et al. (2004), DOI:  10.1080/01490410490465210
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'range_ocog_20_ku': <class 'netCDF4.Variable'>
+int32 range_ocog_20_ku(time_20_ku)
+    _FillValue: 2147483647
+    long_name: corrected altimeter range from OCOG/ICE-1 retracker: 20 Hz Ku band
+    units: m
+    add_offset: 700000.0
+    scale_factor: 0.0001
+    coordinates: lon_20_ku lat_20_ku
+    comment: OCOG/ICE-1 retracker (Bamber, 1994, DOI: 10.1080/01431169408954125).  Instrumental corrections included : USO drift correction (uso_cor_20_ku), internal path correction (int_path_cor_20_ku), distance antenna-COG
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'sig0_ocog_20_ku': <class 'netCDF4.Variable'>
+int16 sig0_ocog_20_ku(time_20_ku)
+    _FillValue: 32767
+    long_name: corrected ocog backscatter coefficient from OCOG/ICE-1 retracker: 20 Hz Ku band
+    units: dB
+    standard_name: surface_backwards_scattering_coefficient_of_radar_wave
+    add_offset: 0.0
+    scale_factor: 0.01
+    coordinates: lon_20_ku lat_20_ku
+    comment: OCOG/ICE-1 retracker (Bamber, 1994, DOI: 10.1080/01431169408954125).. Instrumental corrections included : AGC instrumental errors correction (agc_cor_20_ku) and internal calibration correction (sig0_cal_20_ku)
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'elevation_ocog_20_ku': <class 'netCDF4.Variable'>
+int32 elevation_ocog_20_ku(time_20_ku)
+    _FillValue: 2147483647
+    long_name: corrected altimeter elevation from OCOG/ICE-1 retracker : 20 Hz Ku band
+    units: m
+    add_offset: 0.0
+    scale_factor: 0.0001
+    coordinates: lon_20_ku lat_20_ku
+    comment: Surface elevation relative to the reference ellipsoid from OCOG/ICE-1 retracker (Bamber, 1994, DOI: 10.1080/01431169408954125)".   . Instrumental corrections included : USO drift correction (uso_cor_[x1]_[x2]), internal path correction (int_path_cor_[x1]_[x2]),  distance antenna-COG (cog_cor_[x1]_[x2]) and Doppler slope correction (dop_slope_cor_[x1]_[x2]). Geophysical corrections included: GIM-derived ionospheric correction on Ku band (iono_cor_gim_[x1]_ku), model dry tropospheric correction (mod_dry_tropo_cor_meas_altitude_[x1]_[x2]),  model wet tropospheric correction (mod_wet_tropo_cor_meas_altitude_[x1]_[x2]), solid earth tide height (solid_earth_tide_[x1]_[x2]), geocentric ocean tide height solution 2 = FES (ocean_tide_sol2_[x1]_[x2], on ocean/semi-enclosed seas only)  , geocentric pole tide height (pole_tide_[x1]_[x2]) , ocean loading tide solution 2 = FES (load_tide_sol2_[x1]_[x2], on land only) inverted barometer height correction (inv_bar_cor_[x1] on ocean/semi-enclosed seas only) , high frequency fluctuations of the sea surface topography (hf_fluct_cor_[x1] for NTC/STC off line products only, on ocean/semi-enclosed seas only). A height slope correction is applied for measurements acquired over Greenland and Antarctica
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'range_sea_ice_20_ku': <class 'netCDF4.Variable'>
+int32 range_sea_ice_20_ku(time_20_ku)
+    _FillValue: 2147483647
+    long_name: corrected altimeter range from retrackers dedicated to sea ice: 20 Hz Ku band
+    units: m
+    add_offset: 700000.0
+    scale_factor: 0.0001
+    coordinates: lon_20_ku lat_20_ku
+    comment: SAR mode, altimeter range from sea ice retrackers.Over leads: Giles retracking method. Over floes and open ocean: a threshold first maximum retracker. More information about these sea ice retrackers is available in Tilling et al. (2018), DOI: 10.1016/j.asr.2017.10.051 . Instrumental corrections included : USO drift correction (uso_cor_20_ku), internal path correction (int_path_cor_20_ku) and distance antenna-COG
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'sig0_sea_ice_sheet_20_ku': <class 'netCDF4.Variable'>
+int16 sig0_sea_ice_sheet_20_ku(time_20_ku)
+    _FillValue: 32767
+    long_name: corrected backscatter coefficient from retrackers dedicated to sea ice: 20 Hz Ku band
+    units: dB
+    standard_name: surface_backwards_scattering_coefficient_of_radar_wave
+    add_offset: 0.0
+    scale_factor: 0.01
+    coordinates: lon_20_ku lat_20_ku
+    comment: SAR mode, backscatter coefficient from sea ice retrackers. Over leads: Giles retracking method. Over floes and open ocean: a threshold first maximum retracker. More information about these sea ice retrackers is available in Tilling et al. (2018), DOI: 10.1016/j.asr.2017.10.051 . Instrumental corrections included : AGC instrumental errors correction (agc_cor_20_ku) and internal calibration correction (sig0_cal_20_ku)
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'surf_type_class_20_ku': <class 'netCDF4.Variable'>
+int8 surf_type_class_20_ku(time_20_ku)
+    _FillValue: 127
+    long_name: Altimeter derived surface type classification 
+    flag_values: [0 1 2 3]
+    flag_meanings: open_ocean sea_ice lead unclassified
+    coordinates: lon_20_ku lat_20_ku
+    comment: Surface type classification over sea ice, based on the sea ice concentration ('sea_ice_concentration_20_ku') and SAR waveform peakiness ('peakiness_2_20_ku')
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'mod_dry_tropo_cor_zero_altitude_01': <class 'netCDF4.Variable'>
+int16 mod_dry_tropo_cor_zero_altitude_01(time_01)
+    _FillValue: 32767
+    long_name: model dry tropospheric correction at zero altitude: 1 Hz
+    units: m
+    standard_name: altimeter_range_correction_due_to_dry_troposphere
+    add_offset: 0.0
+    scale_factor: 0.0001
+    coordinates: lon_01 lat_01
+    comment: Computed from 3d meteorological fields at zero altitude, at the altimeter time-tag from the interpolation of 2 meteorological fields that surround the altimeter time-tag. A dry tropospheric correction must be added (negative value) to the instrument range to correct this range measurement for dry tropospheric range delays of the radar pulse
+    source: European Center for Medium Range Weather Forecasting
+    institution: ECMWF
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'mod_dry_tropo_cor_meas_altitude_01': <class 'netCDF4.Variable'>
+int16 mod_dry_tropo_cor_meas_altitude_01(time_01)
+    _FillValue: 32767
+    long_name: model dry tropospheric correction at measurement altitude: 1 Hz
+    units: m
+    standard_name: altimeter_range_correction_due_to_dry_troposphere
+    add_offset: 0.0
+    scale_factor: 0.0001
+    coordinates: lon_01 lat_01
+    comment: Computed from 3d meteorological fields at measurement altitude, at the altimeter time-tag from the interpolation of 2 meteorological fields that surround the altimeter time-tag. A dry tropospheric correction must be added (negative value) to the instrument range to correct this range measurement for dry tropospheric range delays of the radar pulse
+    source: European Center for Medium Range Weather Forecasting
+    institution: ECMWF
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'mod_wet_tropo_cor_zero_altitude_01': <class 'netCDF4.Variable'>
+int16 mod_wet_tropo_cor_zero_altitude_01(time_01)
+    _FillValue: 32767
+    long_name: model wet tropospheric correction at zero altitude: 1 Hz
+    units: m
+    standard_name: altimeter_range_correction_due_to_wet_troposphere
+    add_offset: 0.0
+    scale_factor: 0.0001
+    coordinates: lon_01 lat_01
+    comment: Computed from 3d meteorological fields at zero altitude, at the altimeter time-tag from the interpolation of 2 meteorological fields that surround the altimeter time-tag. A wet tropospheric correction must be added (negative value) to the instrument range to correct this range measurement for wet tropospheric range delays of the radar pulse
+    source: European Center for Medium Range Weather Forecasting
+    institution: ECMWF
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'mod_wet_tropo_cor_meas_altitude_01': <class 'netCDF4.Variable'>
+int16 mod_wet_tropo_cor_meas_altitude_01(time_01)
+    _FillValue: 32767
+    long_name: model wet tropospheric correction at measurement altitude: 1 Hz
+    units: m
+    standard_name: altimeter_range_correction_due_to_wet_troposphere
+    add_offset: 0.0
+    scale_factor: 0.0001
+    coordinates: lon_01 lat_01
+    comment: Computed from 3d meteorological fields at measurement altitude, at the altimeter time-tag from the interpolation of 2 meteorological fields that surround the altimeter time-tag. A wet tropospheric correction must be added (negative value) to the instrument range to correct this range measurement for wet tropospheric range delays of the radar pulse
+    source: European Center for Medium Range Weather Forecasting
+    institution: ECMWF
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'rad_wet_tropo_cor_01_ku': <class 'netCDF4.Variable'>
+int16 rad_wet_tropo_cor_01_ku(time_01)
+    _FillValue: 32767
+    long_name: radiometer wet tropospheric correction: 1 Hz Ku band
+    units: m
+    standard_name: altimeter_range_correction_due_to_wet_troposphere
+    add_offset: 0.0
+    scale_factor: 0.0001
+    coordinates: lon_01 lat_01
+    comment: A wet tropospheric correction must be added (negative value) to the instrument range to correct this range measurement for wet tropospheric range delays of the radar pulse. This correction is valid over ocean surfaces only
+    source: MWR
+    institution: CASA
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'rad_wet_tropo_cor_01_plrm_ku': <class 'netCDF4.Variable'>
+int16 rad_wet_tropo_cor_01_plrm_ku(time_01)
+    _FillValue: 32767
+    long_name: radiometer wet tropospheric correction: 1 Hz Plrm Ku band
+    units: m
+    standard_name: altimeter_range_correction_due_to_wet_troposphere
+    add_offset: 0.0
+    scale_factor: 0.0001
+    coordinates: lon_01 lat_01
+    comment: A wet tropospheric correction must be added (negative value) to the instrument range to correct this range measurement for wet tropospheric range delays of the radar pulse. This correction is valid over ocean surfaces only
+    source: MWR
+    institution: CASA
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'rad_wet_tropo_cor_sst_gam_01_ku': <class 'netCDF4.Variable'>
+int16 rad_wet_tropo_cor_sst_gam_01_ku(time_01)
+    _FillValue: 32767
+    long_name: radiometer wet tropospheric correction: 1 Hz Ku band
+    units: m
+    standard_name: altimeter_range_correction_due_to_wet_troposphere
+    add_offset: 0.0
+    scale_factor: 0.0001
+    coordinates: lon_01 lat_01
+    comment: Computed at the altimeter time-tag from the radiometer brightness temperatures, the Ku-band backscatter coefficient, the sea surface temperature and the lapse rate (decreasing rate of the atmosphere temperature with altitude). A wet tropospheric correction must be added (negative value) to the instrument range to correct this range measurement for wet tropospheric range delays of the radar pulse 
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'rad_wet_tropo_cor_sst_gam_01_plrm_ku': <class 'netCDF4.Variable'>
+int16 rad_wet_tropo_cor_sst_gam_01_plrm_ku(time_01)
+    _FillValue: 32767
+    long_name: radiometer wet tropospheric correction: 1 Hz Plrm Ku band
+    units: m
+    standard_name: altimeter_range_correction_due_to_wet_troposphere
+    add_offset: 0.0
+    scale_factor: 0.0001
+    coordinates: lon_01 lat_01
+    comment: Computed at the altimeter time-tag from the radiometer brightness temperatures, the Ku-band backscatter coefficient, the sea surface temperature and the lapse rate (decreasing rate of the atmosphere temperature with altitude). A wet tropospheric correction must be added (negative value) to the instrument range to correct this range measurement for wet tropospheric range delays of the radar pulse 
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'iono_cor_alt_20_ku': <class 'netCDF4.Variable'>
+int16 iono_cor_alt_20_ku(time_20_ku)
+    _FillValue: 32767
+    long_name: altimeter ionospheric correction: 20 Hz Ku band
+    units: m
+    standard_name: altimeter_range_correction_due_to_ionosphere
+    add_offset: 0.0
+    scale_factor: 0.0001
+    coordinates: lon_20_ku lat_20_ku
+    comment: An ionospheric correction must be added (negative value) to the instrument range to correct this range measurement for ionospheric range delays of the radar pulse. This correction is valid over ocean surfaces only
+    source: SRAL
+    institution: TAS
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'iono_cor_alt_20_plrm_ku': <class 'netCDF4.Variable'>
+int16 iono_cor_alt_20_plrm_ku(time_20_c)
+    _FillValue: 32767
+    long_name: altimeter ionospheric correction: 20 Hz Plrm Ku band
+    units: m
+    standard_name: altimeter_range_correction_due_to_ionosphere
+    add_offset: 0.0
+    scale_factor: 0.0001
+    coordinates: lon_20_c lat_20_c
+    comment: An ionospheric correction must be added (negative value) to the instrument range to correct this range measurement for ionospheric range delays of the radar pulse. This correction is valid over ocean surfaces only
+    source: SRAL
+    institution: TAS
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'iono_cor_gim_01_ku': <class 'netCDF4.Variable'>
+int16 iono_cor_gim_01_ku(time_01)
+    _FillValue: 32767
+    long_name: GIM ionospheric correction: 1 Hz
+    units: m
+    standard_name: altimeter_range_correction_due_to_ionosphere
+    add_offset: 0.0
+    scale_factor: 0.0001
+    coordinates: lon_01 lat_01
+    comment: An ionospheric correction must be added (negative value) to the instrument range to correct this range measurement for ionospheric range delays of the radar pulse.
+    source: [TBD GIM version]
+    institution: NASA/JPL
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'sea_state_bias_01_ku': <class 'netCDF4.Variable'>
+int16 sea_state_bias_01_ku(time_01)
+    _FillValue: 32767
+    long_name: Sea state bias correction : 1 Hz Ku band
+    units: m
+    standard_name: sea_surface_height_bias_due_to_sea_surface_roughness
+    add_offset: 0.0
+    scale_factor: 0.0001
+    coordinates: lon_01 lat_01
+    comment: A sea state bias correction must be added (negative value) to the instrument range to correct this range measurement for sea state delays of the radar pulse. This correction must be applied for oceanic measurements, not for rivers and small lakes
+    source: Empirical solution fitted on Jason-2 GDR_C data
+    institution: CNES
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'sea_state_bias_01_plrm_ku': <class 'netCDF4.Variable'>
+int16 sea_state_bias_01_plrm_ku(time_01)
+    _FillValue: 32767
+    long_name: Sea state bias correction : 1 Hz Plrm Ku band
+    units: m
+    standard_name: sea_surface_height_bias_due_to_sea_surface_roughness
+    add_offset: 0.0
+    scale_factor: 0.0001
+    coordinates: lon_01 lat_01
+    comment: A sea state bias correction must be added (negative value) to the instrument range to correct this range measurement for sea state delays of the radar pulse. This correction must be applied for oceanic measurements, not for rivers and small lakes
+    source: Empirical solution fitted on Jason-2 GDR_C data
+    institution: CNES
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'atm_cor_sig0_01_ku': <class 'netCDF4.Variable'>
+int16 atm_cor_sig0_01_ku(time_01)
+    _FillValue: 32767
+    long_name: Atmospheric attenuation correction on the backscatter coefficient: 1 Hz Ku band
+    units: dB
+    add_offset: 0.0
+    scale_factor: 0.01
+    coordinates: lon_01 lat_01
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'atm_cor_sig0_01_c': <class 'netCDF4.Variable'>
+int16 atm_cor_sig0_01_c(time_01)
+    _FillValue: 32767
+    long_name: Atmospheric attenuation correction on the backscatter coefficient: 1 Hz C band
+    units: dB
+    add_offset: 0.0
+    scale_factor: 0.01
+    coordinates: lon_01 lat_01
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'atm_cor_sig0_01_plrm_ku': <class 'netCDF4.Variable'>
+int16 atm_cor_sig0_01_plrm_ku(time_01)
+    _FillValue: 32767
+    long_name: Atmospheric attenuation correction on the backscatter coefficient: 1 Hz Plrm Ku band
+    units: dB
+    add_offset: 0.0
+    scale_factor: 0.01
+    coordinates: lon_01 lat_01
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'geoid_01': <class 'netCDF4.Variable'>
+int32 geoid_01(time_01)
+    _FillValue: 2147483647
+    long_name: Geoid height : 1 Hz
+    units: m
+    standard_name: geoid_height_above_reference_ellipsoid
+    add_offset: 0.0
+    scale_factor: 0.0001
+    coordinates: lon_01 lat_01
+    comment: Computed from the geoid model with a correction to refer the value to the mean tide system i.e. includes the permanent tide (zero frequency)
+    source: EGM2008
+    institution: GSFC
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'odle_01': <class 'netCDF4.Variable'>
+int32 odle_01(time_01)
+    _FillValue: 2147483647
+    long_name: Ocean Depth or Land Elevation (ODLE): 1Hz
+    units: m
+    add_offset: 0.0
+    scale_factor: 0.0001
+    coordinates: lon_01 lat_01
+    source: ACE2 model from Berry et al. (2010) DOI: 10.1007/978-3-642-10634-7_30
+    institution: EAPRS Laboratory
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'solid_earth_tide_01': <class 'netCDF4.Variable'>
+int16 solid_earth_tide_01(time_01)
+    _FillValue: 32767
+    long_name: Solid earth tide height : 1 Hz
+    units: m
+    standard_name: sea_surface_height_amplitude_due_to_earth_tide
+    add_offset: 0.0
+    scale_factor: 0.0001
+    coordinates: lon_01 lat_01
+    comment: Calculated using Cartwright and Edden tables and consisting of the second and third degree constituents. The permanent tide (zero frequency) is not included
+    source: Cartwright and Edden [1973] Corrected tables of tidal harmonics - J. Geophys. J. R. Astr. Soc., 33, 253-264.
+    institution: [TBD Solid earth tide institution]
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'pole_tide_01': <class 'netCDF4.Variable'>
+int16 pole_tide_01(time_01)
+    _FillValue: 32767
+    long_name: Geocentric tide height : 1 Hz
+    units: m
+    standard_name: sea_surface_height_amplitude_due_to_pole_tide
+    add_offset: 0.0
+    scale_factor: 0.0001
+    coordinates: lon_01 lat_01
+    source: Wahr [1985] Deformation of the Earth induced by polar motion - J. Geophys. Res. (Solid Earth), 90, 9363-9368.
+    institution: IERS [TBC]
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'sea_ice_concentration_20_ku': <class 'netCDF4.Variable'>
+int32 sea_ice_concentration_20_ku(time_20_ku)
+    _FillValue: 2147483647
+    long_name: sea-ice concentration: 20 Hz Ku band
+    units: percent
+    add_offset: 0.0
+    scale_factor: 0.01
+    coordinates: lon_20_ku lat_20_ku
+    comment: Derived from the Global Sea Ice Concentration interim climate data record, release 3, produced and delivered by OSI SAF (product identifier = OSI-430-a)
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'wind_speed_mod_u_01': <class 'netCDF4.Variable'>
+int16 wind_speed_mod_u_01(time_01)
+    _FillValue: 32767
+    long_name: U component of the model wind vector : 1 Hz
+    units: m/s
+    standard_name: wind_speed
+    quality_flag: meteo_map_avail_01
+    add_offset: 0.0
+    scale_factor: 0.01
+    coordinates: lon_01 lat_01
+    comment: Computed at the altimeter time-tag from the interpolation of 2 meteorological fields that surround the altimeter time-tag 
+    source: European Center for Medium Range Weather Forecasting
+    institution: ECMWF
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'wind_speed_mod_v_01': <class 'netCDF4.Variable'>
+int16 wind_speed_mod_v_01(time_01)
+    _FillValue: 32767
+    long_name: V component of the model wind vector : 1 Hz
+    units: m/s
+    standard_name: wind_speed
+    quality_flag: meteo_map_avail_01
+    add_offset: 0.0
+    scale_factor: 0.01
+    coordinates: lon_01 lat_01
+    comment: Computed at the altimeter time-tag from the interpolation of 2 meteorological fields that surround the altimeter time-tag 
+    source: European Center for Medium Range Weather Forecasting
+    institution: ECMWF
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'wind_speed_alt_01_ku': <class 'netCDF4.Variable'>
+int16 wind_speed_alt_01_ku(time_01)
+    _FillValue: 32767
+    long_name: Altimeter wind speed : 1 Hz Ku band
+    units: m/s
+    standard_name: wind_speed
+    add_offset: 0.0
+    scale_factor: 0.01
+    coordinates: lon_01 lat_01
+    comment: Should not be used over land
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'wind_speed_alt_01_plrm_ku': <class 'netCDF4.Variable'>
+int16 wind_speed_alt_01_plrm_ku(time_01)
+    _FillValue: 32767
+    long_name: Altimeter wind speed : 1 Hz Plrm Ku band
+    units: m/s
+    standard_name: wind_speed
+    add_offset: 0.0
+    scale_factor: 0.01
+    coordinates: lon_01 lat_01
+    comment: Should not be used over land
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'off_nadir_angle_used_20_ku': <class 'netCDF4.Variable'>
+int8 off_nadir_angle_used_20_ku(time_20_ku)
+    _FillValue: 127
+    long_name: flag indicating the use or not of the 20 Hz estimate of the square of the off-nadir angle in the computation of 1Hz estimate: 20 Hz Ku band
+    flag_values: [0 1]
+    flag_meanings: Yes No
+    coordinates: lon_20_ku lat_20_ku
+    comment: LRM mode : ocean retracking , SAR mode : ocean/coastal retracking 
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'off_nadir_angle_used_20_plrm_ku': <class 'netCDF4.Variable'>
+int8 off_nadir_angle_used_20_plrm_ku(time_20_c)
+    _FillValue: 127
+    long_name: flag indicating the use or not of the 20 Hz estimate of the square of the off-nadir angle in the computation of 1Hz estimate: 20 Hz Plrm Ku band
+    flag_values: [0 1]
+    flag_meanings: Yes No
+    coordinates: lon_20_c lat_20_c
+    comment: LRM mode : ocean retracking , SAR mode : ocean/coastal retracking 
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'off_nadir_roll_angle_pf_01': <class 'netCDF4.Variable'>
+int32 off_nadir_roll_angle_pf_01(time_01)
+    _FillValue: 2147483647
+    long_name: Off nadir roll angle derived from platform data: 1 Hz
+    units: degrees
+    add_offset: 0.0
+    scale_factor: 0.0001
+    coordinates: lon_01 lat_01
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'off_nadir_pitch_angle_pf_01': <class 'netCDF4.Variable'>
+int32 off_nadir_pitch_angle_pf_01(time_01)
+    _FillValue: 2147483647
+    long_name: Off nadir pitch angle derived from platform data: 1 Hz
+    units: degrees
+    add_offset: 0.0
+    scale_factor: 0.0001
+    coordinates: lon_01 lat_01
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'off_nadir_yaw_angle_pf_01': <class 'netCDF4.Variable'>
+int32 off_nadir_yaw_angle_pf_01(time_01)
+    _FillValue: 2147483647
+    long_name: Off nadir yaw angle derived from platform data: 1 Hz
+    units: degrees
+    add_offset: 0.0
+    scale_factor: 0.0001
+    coordinates: lon_01 lat_01
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'instr_op_mode_20_ku': <class 'netCDF4.Variable'>
+int8 instr_op_mode_20_ku(time_20_ku)
+    _FillValue: 127
+    long_name: Instrument operating mode : 20 Hz Ku band
+    flag_values: [0 1 2]
+    flag_meanings: LRM SAR LRM_and_SAR
+    coordinates: lon_20_ku lat_20_ku
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'instr_op_mode_20_c': <class 'netCDF4.Variable'>
+int8 instr_op_mode_20_c(time_20_c)
+    _FillValue: 127
+    long_name: Instrument operating mode : 20 Hz C band
+    flag_values: [0 1 2]
+    flag_meanings: LRM SAR LRM_and_SAR
+    coordinates: lon_20_c lat_20_c
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'mode_id_20_ku': <class 'netCDF4.Variable'>
+int8 mode_id_20_ku(time_20_ku)
+    _FillValue: 127
+    long_name: Mode identifier : 20 Hz Ku band
+    flag_values: [0 1 2]
+    flag_meanings: closed_loop open_loop open_loop_fixed_gain
+    coordinates: lon_20_ku lat_20_ku
+    comment: open loop fixed gain state applicable to SAR mode only
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'mode_id_20_c': <class 'netCDF4.Variable'>
+int8 mode_id_20_c(time_20_c)
+    _FillValue: 127
+    long_name: Mode identifier : 20 Hz C band
+    flag_values: [0 1 2]
+    flag_meanings: closed_loop open_loop open_loop_fixed_gain
+    coordinates: lon_20_c lat_20_c
+    comment: open loop fixed gain state applicable to SAR mode only
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'meteo_map_avail_01': <class 'netCDF4.Variable'>
+int8 meteo_map_avail_01(time_01)
+    _FillValue: 127
+    long_name: Meteorological map availability: 1 Hz
+    flag_values: [0 1 2]
+    flag_meanings: 2_maps_nominal 1_map_extropolated no_map
+    coordinates: lon_01 lat_01
+    comment: Possible values are:  0 meaning '2 maps, nominal' (six hours apart), 1 meaning '1 map, extrapolation used', 2 meaning 'no map'. 
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'rain_flag_01_ku': <class 'netCDF4.Variable'>
+int8 rain_flag_01_ku(time_01)
+    _FillValue: 127
+    long_name: Altimeter rain flag : 1 Hz Ku band
+    flag_values: [0 1 2 3 4 5]
+    flag_meanings: no_rain rain high_rain_probability_from_altimeter high_probability_of_no_rain_from_altimeter ambiguous_situation_possibility_of_ice evaluation_not_possible
+    coordinates: lon_01 lat_01
+    comment: 6-states rain flag based on Sigma naught estimations in Ku band (SAR mode, SAMOSA retracker) and C bands
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'rain_flag_01_plrm_ku': <class 'netCDF4.Variable'>
+int8 rain_flag_01_plrm_ku(time_01)
+    _FillValue: 127
+    long_name: Altimeter rain flag: 1 Hz Plrm Ku band
+    flag_values: [0 1 2 3 4 5]
+    flag_meanings: no_rain rain high_rain_probability_from_altimeter high_probability_of_no_rain_from_altimeter ambiguous_situation_possibility_of_ice evaluation_not_possible
+    coordinates: lon_01 lat_01
+    comment: 6-states rain flag based on Sigma naught estimations in Ku band (P-LRM, MLE4 Brown retracker) and C bands
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'open_sea_ice_flag_01_ku': <class 'netCDF4.Variable'>
+int8 open_sea_ice_flag_01_ku(time_01)
+    _FillValue: 127
+    long_name: Open sea-ice flag : 1 Hz Ku band
+    flag_values: [0 1 2 3 4 5]
+    flag_meanings: ocean first_year_sea_ice wet_ice multi_year_sea_ice ambiguous_mixture_of_type not_evaluated
+    coordinates: lon_01 lat_01
+    comment: 6-states ocean/sea-ice flag indicating open water or sea-ice type (i.e. first-year ice, multiyear ice, wet ice, ambiguous / mixture of type) along with an additional “not evaluated” state in case of failure. References: Tran et al. (2009), DOI: 10.1109/LGRS.2008.2005275
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'open_sea_ice_flag_01_plrm_ku': <class 'netCDF4.Variable'>
+int8 open_sea_ice_flag_01_plrm_ku(time_01)
+    _FillValue: 127
+    long_name: Open sea-ice flag : 1 Hz Plrm Ku band
+    flag_values: [0 1 2 3 4 5]
+    flag_meanings: ocean first_year_sea_ice wet_ice multi_year_sea_ice ambiguous_mixture_of_type not_evaluated
+    coordinates: lon_01 lat_01
+    comment: 6-states ocean/sea-ice flag indicating open water or sea-ice type (i.e. first-year ice, multiyear ice, wet ice, ambiguous / mixture of type) along with an additional “not evaluated” state in case of failure. References: Tran et al. (2009), DOI: 10.1109/LGRS.2008.2005275
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'open_water_class_01_ku': <class 'netCDF4.Variable'>
+int8 open_water_class_01_ku(time_01)
+    _FillValue: 127
+    long_name: Open water class membership : 1 Hz Ku band
+    units: count
+    add_offset: 0.0
+    scale_factor: 0.01
+    coordinates: lon_01 lat_01
+    comment: Membership values for open water class. Value between 0 and 1. References: Tran et al. (2009), DOI: 10.1109/LGRS.2008.2005275
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'open_water_class_01_plrm_ku': <class 'netCDF4.Variable'>
+int8 open_water_class_01_plrm_ku(time_01)
+    _FillValue: 127
+    long_name: Open water class membership : 1 Hz Plrm Ku band
+    units: count
+    add_offset: 0.0
+    scale_factor: 0.01
+    coordinates: lon_01 lat_01
+    comment: Membership values for open water class.Value between 0 and 1. References: Tran et al. (2009), DOI: 10.1109/LGRS.2008.2005275
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'first_year_ice_class_01_ku': <class 'netCDF4.Variable'>
+int8 first_year_ice_class_01_ku(time_01)
+    _FillValue: 127
+    long_name: First-year ice class membership : 1 Hz Ku band
+    units: count
+    add_offset: 0.0
+    scale_factor: 0.01
+    coordinates: lon_01 lat_01
+    comment: Membership values for 'first year ice' class. Value between 0 and 1. References: Tran et al. (2009), DOI: 10.1109/LGRS.2008.2005275
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'first_year_ice_class_01_plrm_ku': <class 'netCDF4.Variable'>
+int8 first_year_ice_class_01_plrm_ku(time_01)
+    _FillValue: 127
+    long_name: First-year ice class membership : 1 Hz Plrm Ku band
+    units: count
+    add_offset: 0.0
+    scale_factor: 0.01
+    coordinates: lon_01 lat_01
+    comment: Membership values for 'first year ice' class. Value between 0 and 1. References: Tran et al. (2009), DOI: 10.1109/LGRS.2008.2005275
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'multi_year_ice_class_01_ku': <class 'netCDF4.Variable'>
+int8 multi_year_ice_class_01_ku(time_01)
+    _FillValue: 127
+    long_name: Multi-year ice class membership : 1 Hz Ku band
+    units: count
+    add_offset: 0.0
+    scale_factor: 0.01
+    coordinates: lon_01 lat_01
+    comment: Membership values for 'multi year ice' class. Value between 0 and 1. References: Tran et al. (2009), DOI: 10.1109/LGRS.2008.2005275
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'multi_year_ice_class_01_plrm_ku': <class 'netCDF4.Variable'>
+int8 multi_year_ice_class_01_plrm_ku(time_01)
+    _FillValue: 127
+    long_name: Multi-year ice class membership : 1 Hz Plrm Ku band
+    units: count
+    add_offset: 0.0
+    scale_factor: 0.01
+    coordinates: lon_01 lat_01
+    comment: Membership values for 'multi year ice' class. Value between 0 and 1. References: Tran et al. (2009), DOI: 10.1109/LGRS.2008.2005275
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'wet_ice_class_01_ku': <class 'netCDF4.Variable'>
+int8 wet_ice_class_01_ku(time_01)
+    _FillValue: 127
+    long_name: Wet ice ice class membership : 1 Hz Ku band
+    units: count
+    add_offset: 0.0
+    scale_factor: 0.01
+    coordinates: lon_01 lat_01
+    comment: Membership values for 'wet year ice' class. Value between 0 and 1. References: Tran et al. (2009), DOI: 10.1109/LGRS.2008.2005275
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'wet_ice_class_01_plrm_ku': <class 'netCDF4.Variable'>
+int8 wet_ice_class_01_plrm_ku(time_01)
+    _FillValue: 127
+    long_name: Wet ice ice class membership : 1 Hz Plrm Ku band
+    units: count
+    add_offset: 0.0
+    scale_factor: 0.01
+    coordinates: lon_01 lat_01
+    comment: Membership values for 'wet year ice' class. Value between 0 and 1. References: Tran et al. (2009), DOI: 10.1109/LGRS.2008.2005275
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'climato_use_flag_01_plrm_ku': <class 'netCDF4.Variable'>
+int8 climato_use_flag_01_plrm_ku(time_01)
+    long_name: Flag indicating the use of climatological values for the computation of Sigma atmospheric attenuation: 01 Hz Plrm Ku band 
+    _FillValue: 127
+    flag_values: [0 1]
+    flag_meanings: climato_not_used climato_used
+    coordinates: lon_01 lat_01
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'peakiness_1_20_ku': <class 'netCDF4.Variable'>
+int16 peakiness_1_20_ku(time_20_ku)
+    _FillValue: 32767
+    long_name: Peakiness 1: 20 Hz Ku band
+    units: count
+    add_offset: 0.0
+    scale_factor: 0.01
+    coordinates: lon_20_ku lat_20_ku
+    comment: Peakiness, calculated as the ratio of maximum to mean return power of the waveform
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'peakiness_1_20_c': <class 'netCDF4.Variable'>
+int16 peakiness_1_20_c(time_20_c)
+    _FillValue: 32767
+    long_name: Peakiness 1: 20 Hz C band
+    units: count
+    add_offset: 0.0
+    scale_factor: 0.01
+    coordinates: lon_20_c lat_20_c
+    comment: Peakiness, calculated as the ratio of maximum to mean return power of the waveform
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'peakiness_1_20_plrm_ku': <class 'netCDF4.Variable'>
+int16 peakiness_1_20_plrm_ku(time_20_c)
+    _FillValue: 32767
+    long_name: Peakiness 1: 20 Hz Plrm Ku band
+    units: count
+    add_offset: 0.0
+    scale_factor: 0.01
+    coordinates: lon_20_c lat_20_c
+    comment: Peakiness, calculated as the ratio of maximum to mean return power of the waveform
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'peakiness_2_20_ku': <class 'netCDF4.Variable'>
+int16 peakiness_2_20_ku(time_20_ku)
+    _FillValue: 32767
+    long_name: Peakiness 2: 20 Hz Ku band
+    units: count
+    add_offset: 0.0
+    scale_factor: 0.01
+    coordinates: lon_20_ku lat_20_ku
+    comment: Computation from Peacock and Laxon (2004), DOI: 10.1029/2001JC001026
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'peakiness_2_20_c': <class 'netCDF4.Variable'>
+int16 peakiness_2_20_c(time_20_c)
+    _FillValue: 32767
+    long_name: Peakiness 2: 20 Hz C band
+    units: count
+    add_offset: 0.0
+    scale_factor: 0.01
+    coordinates: lon_20_c lat_20_c
+    comment: Computation from Peacock and Laxon (2004), DOI: 10.1029/2001JC001026
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'nb_stack_20_ku': <class 'netCDF4.Variable'>
+uint16 nb_stack_20_ku(time_20_ku)
+    _FillValue: 65535
+    long_name: Number of waveforms summed in stack in SAR processing : 20 Hz Ku band
+    units: count
+    coordinates: lon_20_ku lat_20_ku
+    comment: Number of multilooked beams used to form the SAR mode waveform
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'max_stack_20_ku': <class 'netCDF4.Variable'>
+uint32 max_stack_20_ku(time_20_ku)
+    long_name: maximum power of stack : 20 Hz Ku band
+    units: FFT power unit
+    _FillValue: 4294967295
+    coordinates: lon_20_ku lat_20_ku
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'stdev_stack_20_ku': <class 'netCDF4.Variable'>
+uint32 stdev_stack_20_ku(time_20_ku)
+    long_name: standard deviation of stack : 20 Hz Ku band
+    scale_factor: 1e-06
+    add_offset: 0.0
+    units: rad
+    _FillValue: 4294967295
+    coordinates: lon_20_ku lat_20_ku
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'skew_stack_20_ku': <class 'netCDF4.Variable'>
+int32 skew_stack_20_ku(time_20_ku)
+    long_name: skewness of stack : 20 Hz Ku band
+    scale_factor: 1e-06
+    add_offset: 0.0
+    units: count
+    _FillValue: 2147483647
+    coordinates: lon_20_ku lat_20_ku
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'kurt_stack_20_ku': <class 'netCDF4.Variable'>
+int32 kurt_stack_20_ku(time_20_ku)
+    long_name: kurtosis of stack : 20 Hz Ku band
+    scale_factor: 1e-06
+    add_offset: 0.0
+    units: count
+    _FillValue: 2147483647
+    coordinates: lon_20_ku lat_20_ku
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'beam_ang_stack_20_ku': <class 'netCDF4.Variable'>
+int16 beam_ang_stack_20_ku(time_20_ku, max_multi_stack_ind)
+    long_name: look angles in stack: 20 Hz Ku band
+    comment: Look angles in stack: 20 Hz Ku band. These are looking angles and not beam angles. The useful values of the table are the first n_useful values where n_useful is the number of waveforms summed in stack (nb_stack_20_ku)
+    scale_factor: 1e-06
+    add_offset: 0.0
+    units: rad
+    _FillValue: 32767
+    coordinates: lon_20_ku lat_20_ku
+unlimited dimensions: 
+current shape = (25093, 256)
+filling on, 'beam_form_20_ku': <class 'netCDF4.Variable'>
+uint16 beam_form_20_ku(time_20_ku)
+    long_name: flag on beam formation quality in stack : 20 Hz Ku band
+    scale_factor: 0.01
+    add_offset: 0.0
+    units: percent
+    _FillValue: 65535
+    coordinates: lon_20_ku lat_20_ku
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'max_loc_stack_20_ku': <class 'netCDF4.Variable'>
+int16 max_loc_stack_20_ku(time_20_ku)
+    long_name: Location of the maximum power of stack : 20 Hz Ku band
+    comment: Doppler beam angle corresponding to the maximum power in the stack
+    scale_factor: 1e-06
+    add_offset: 1.57
+    units: rad
+    _FillValue: 32767
+    coordinates: lon_20_ku  lat_20_ku 
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'flag_man_pres_20_ku': <class 'netCDF4.Variable'>
+int8 flag_man_pres_20_ku(time_20_ku)
+    _FillValue: 127
+    long_name: manoeuvre presence flag : 20 Hz ku band 
+    flag_values: [0 1]
+    flag_meanings: no_manoeuvre ongoing_manoeuvre
+    coordinates: lon_20_ku lat_20_ku
+    comment: SAR mode: value the closest in time to the reference measurement
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'flag_man_pres_20_c': <class 'netCDF4.Variable'>
+int8 flag_man_pres_20_c(time_20_c)
+    _FillValue: 127
+    long_name: manoeuvre presence flag : 20 Hz C band 
+    flag_values: [0 1]
+    flag_meanings: no_manoeuvre ongoing_manoeuvre
+    coordinates: lon_20_c lat_20_c
+    comment: SAR mode: value the closest in time to the reference measurement
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'index_1hz_meas_20_ku': <class 'netCDF4.Variable'>
+int16 index_1hz_meas_20_ku(time_20_ku)
+    _FillValue: 32767
+    long_name: Index of the 1Hz measurement : 20 Hz ku band
+    units: count
+    coordinates: lon_20_ku lat_20_ku
+    comment: Index of the 1-Hz measurement associated to the 20-Hz measurement, zero index corresponding to the first 1-Hz measurement of the dataset.
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'index_1hz_meas_20_c': <class 'netCDF4.Variable'>
+int16 index_1hz_meas_20_c(time_20_c)
+    _FillValue: 32767
+    long_name: Index of the 1Hz measurement : 20 Hz C band
+    units: count
+    coordinates: lon_20_c lat_20_c
+    comment: Index of the 1-Hz measurement associated to the 20-Hz measurement, zero index corresponding to the first 1-Hz measurement of the dataset.
+unlimited dimensions: 
+current shape = (25093,)
+filling on, 'index_first_20hz_meas_01_ku': <class 'netCDF4.Variable'>
+int32 index_first_20hz_meas_01_ku(time_01)
+    _FillValue: 2147483647
+    long_name: Index of the first 20Hz measurement : 01 Hz ku band
+    units: count
+    coordinates: lon_01 lat_01
+    comment: Index of the first 20-Hz measurement associated to the 1-Hz measurement, zero index corresponding to the first 20-Hz measurement of the dataset.
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'index_first_20hz_meas_01_c': <class 'netCDF4.Variable'>
+int32 index_first_20hz_meas_01_c(time_01)
+    _FillValue: 2147483647
+    long_name: Index of the first 20Hz measurement : 01 Hz C band
+    units: count
+    coordinates: lon_01 lat_01
+    comment: Index of the first 20-Hz measurement associated to the 1-Hz measurement, zero index corresponding to the first 20-Hz measurement of the dataset.
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'num_20hz_meas_01_ku': <class 'netCDF4.Variable'>
+int16 num_20hz_meas_01_ku(time_01)
+    _FillValue: 32767
+    long_name: Number of 20Hz measurements : 01 Hz ku band
+    units: count
+    coordinates: lon_01 lat_01
+    comment: Number of 20-Hz measurements associated to the 1-Hz measurement.
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'num_20hz_meas_01_c': <class 'netCDF4.Variable'>
+int16 num_20hz_meas_01_c(time_01)
+    _FillValue: 32767
+    long_name: Number of 20Hz measurements : 01 Hz C band
+    units: count
+    coordinates: lon_01 lat_01
+    comment: Number of 20-Hz measurements associated to the 1-Hz measurement.
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'orbit_type_01': <class 'netCDF4.Variable'>
+int8 orbit_type_01(time_01)
+    _FillValue: 127
+    long_name: Orbit type flag : 1 Hz Ku band
+    flag_values: [0 1 2 3 4 5 6 7 8]
+    flag_meanings: osf fos navatt doris_nav gnss_roe pod_moe salp_moe pod_poe salp_poe
+    coordinates: lon_01 lat_01
+unlimited dimensions: 
+current shape = (1372,)
+filling on, 'waveform_qual_ice_20_ku': <class 'netCDF4.Variable'>
+int8 waveform_qual_ice_20_ku(time_20_ku)
+    _FillValue: 127
+    long_name: Ice waveform quality check status : 20 Hz ku band
+    flag_mask: [ 0  1  2  4  8 16 32]
+    flag_meanings: waveform_ok total_power_test_failed noise_power_test_failed variance_test_failed leading_edge_test_failed low_peakiness_test_failed high_peakiness_test_failed
+    coordinates: lon_20_ku lat_20_ku
+unlimited dimensions: 
+current shape = (25093,)
+filling on}

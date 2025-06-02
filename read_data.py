@@ -128,6 +128,9 @@ def calc_range_cor():
         print("--------------------------")
 
 
-def calc_llh_cor():
+# def calc_llh_cor():
 
-    
+# print(ds)
+
+with open("text.txt", "w") as f:
+    f.write(str(ds.variables))
