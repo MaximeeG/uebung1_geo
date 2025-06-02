@@ -221,7 +221,7 @@ if not write_complete_cycle:
 # === Save always and show when selected ===
 def save_and_optionally_show(fig, filename):
     # Save as SVG
-    fig.savefig(f"plots/{filename}.svg", format="svg")
+    fig.savefig(f"plots/{filename}.pdf", format="pdf")
     if show_plots:
         plt.show()
     else:
