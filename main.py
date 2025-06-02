@@ -3,6 +3,7 @@ import re
 from netCDF4 import Dataset
 import numpy as np
 import matplotlib.pyplot as plt
+from datetime import datetime, timedelta
 
 # === CONFIGURATION ===
 write_complete_cycle = False  # True = full orbit, False = Müggelsee and Virtual Station
@@ -217,6 +218,7 @@ if not write_complete_cycle:
 
 
 
+# === Save always and show when selected ===
 def save_and_optionally_show(fig, filename):
     # Save as SVG
     fig.savefig(f"plots/{filename}.svg", format="svg")
@@ -225,13 +227,23 @@ def save_and_optionally_show(fig, filename):
     else:
         plt.close(fig)
 
+# TAI to UTC conversion
+def tai_to_utc(tai_seconds):
+    tai_epoch = datetime(2000, 1, 1)
+    leap_seconds = 37  # as of June 2025
+    return [tai_epoch + timedelta(seconds=t - leap_seconds) for t in tai_seconds]
+
+# Convert time array to UTC datetime
+utc_time_20ghz = tai_to_utc(time_20ghz)
+utc_station_time = tai_to_utc(station_time)
+
 # === PLOT RANGE ORIGINAL vs. CORRECTED ===
-fig = plt.figure(figsize=(16, 9))
-plt.plot(range_20ghz, label="Original Range (20GHz)")
-plt.plot(corrected_range, label="Corrected Range", linestyle="--")
-plt.xlabel("Measurement Index")
-plt.ylabel("Range (m)")
-plt.title("Original vs Corrected Range")
+fig = plt.figure(figsize=(6, 4))
+plt.plot(utc_time_20ghz, range_20ghz, label="Original Range")
+plt.plot(utc_time_20ghz, corrected_range, label="Corrected Range", linestyle="--")
+plt.xlabel("Time (UTC)")
+plt.ylabel("Range (20GHz) [m]")
+plt.title("Original vs. Corrected Range")
 plt.legend()
 plt.grid(True)
 plt.tight_layout()
@@ -239,10 +251,10 @@ save_and_optionally_show(fig, "range_original_vs_corrected")
 
 # === PLOT RANGE DIFFERENCE ===
 range_diff = range_20ghz - corrected_range
-fig = plt.figure(figsize=(16, 9))
-plt.plot(range_diff, label="Difference: Original - Corrected")
-plt.xlabel("Measurement Index")
-plt.ylabel("Difference in Range (m)")
+fig = plt.figure(figsize=(6, 4))
+plt.plot(utc_time_20ghz, range_diff, label="Difference: Original - Corrected")
+plt.xlabel("Time (UTC)")
+plt.ylabel("Range Difference (20GHz) [m]")
 plt.title("Difference Between Original and Corrected Range")
 plt.legend()
 plt.grid(True)
@@ -250,26 +262,26 @@ plt.tight_layout()
 save_and_optionally_show(fig, "range_difference")
 
 # === PLOT RANGE CORRECTIONS ===
-fig = plt.figure(figsize=(16, 9))
+fig = plt.figure(figsize=(6, 4))
 plt.gca().invert_yaxis()
-plt.plot(wet_20ghz+dry_20ghz+iono_20ghz, label="All Corrections", linestyle='dotted', color='black')
-plt.plot(dry_20ghz, label="Dry Tropo Correction", color='orange')
-plt.plot(wet_20ghz, label="Wet Tropo Correction", color='blue')
-plt.plot(iono_20ghz, label="Ionospheric Correction")
-plt.xlabel("Measurement Index")
-plt.ylabel("Correction (m)")
-plt.title("Atmospheric Corrections Along Flight Path")
+plt.plot(utc_time_20ghz, wet_20ghz+dry_20ghz+iono_20ghz, label="All Corrections", linestyle='dotted', color='black')
+plt.plot(utc_time_20ghz, dry_20ghz, label="Dry Tropospheric Correction", color='orange')
+plt.plot(utc_time_20ghz,wet_20ghz, label="Wet Tropospheric Correction", color='blue')
+plt.plot(utc_time_20ghz, iono_20ghz, label="Ionospheric Correction")
+plt.xlabel("Time (UTC)")
+plt.ylabel("Correction (20GHz) [m]")
+plt.title("Atmospheric Corrections")
 plt.legend()
 plt.grid(True)
 plt.tight_layout()
 save_and_optionally_show(fig, "atmospheric_corrections")
 
 # === PLOT LLH vs. CORRECTED ===
-fig = plt.figure(figsize=(16, 9))
+fig = plt.figure(figsize=(6, 4))
 # plt.plot(llh, label="LLH")  # Uncomment if you want to include
-plt.plot(corrected_llh, label="Corrected LLH")
-plt.xlabel("Measurement Index")
-plt.ylabel("Height above Ellipsoid (m)")
+plt.plot(utc_time_20ghz, corrected_llh, label="Corrected LLH")
+plt.xlabel("Time (UTC)")
+plt.ylabel("Height above Ellipsoid (20GHz) [m]")
 plt.title("LLH Relative to Reference Ellipsoid")
 plt.grid(True)
 plt.legend()
@@ -277,23 +289,23 @@ plt.tight_layout()
 save_and_optionally_show(fig, "corrected_llh")
 
 # === PLOT TIDAL CORRECTIONS ===
-fig = plt.figure(figsize=(16, 9))
-plt.plot(solid_earth_tide_20ghz + pole_tide_20ghz, label="Total Tidal Correction", linestyle='dotted', color='black')
-plt.plot(solid_earth_tide_20ghz, label="Solid Earth Tide Correction")
-plt.plot(pole_tide_20ghz, label="Pole Tide Correction")
-plt.xlabel("Measurement Index")
-plt.ylabel("Correction (m)")
-plt.title("Tidal Corrections Along Flight Path")
+fig = plt.figure(figsize=(6, 4))
+plt.plot(utc_time_20ghz, solid_earth_tide_20ghz + pole_tide_20ghz, label="Total Tidal Correction", linestyle='dotted', color='black')
+plt.plot(utc_time_20ghz, solid_earth_tide_20ghz, label="Solid Earth Tide Correction")
+plt.plot(utc_time_20ghz, pole_tide_20ghz, label="Pole Tide Correction")
+plt.xlabel("Time (UTC)")
+plt.ylabel("Correction (20GHz) [m]")
+plt.title("Tidal Corrections")
 plt.legend()
 plt.grid(True)
 plt.tight_layout()
 save_and_optionally_show(fig, "tidal_corrections")
 
 # === PLOT ORTHOMETRIC HEIGHT ===
-fig = plt.figure(figsize=(16, 9))
-plt.plot(orthometric_height, label="Orthometric Height")
-plt.xlabel("Measurement Index")
-plt.ylabel("Height (m)")
+fig = plt.figure(figsize=(6, 4))
+plt.plot(utc_time_20ghz, orthometric_height, label="Orthometric Height")
+plt.xlabel("Time (UTC)")
+plt.ylabel("Orthometric Height (20GHz) [m]")
 plt.title("Orthometric Height")
 plt.grid(True)
 plt.legend()
@@ -302,12 +314,12 @@ save_and_optionally_show(fig, "orthometric_height")
 
 if not write_complete_cycle:
     # === PLOT CORRECTED VIRTUAL STATION LLH ===
-    fig = plt.figure(figsize=(16, 9))
+    fig = plt.figure(figsize=(6, 4))
     # plt.plot(station_llh, label="LLH")  # Uncomment if you want to include
-    plt.plot(station_corrected_llh, label="Corrected LLH")
-    plt.xlabel("Measurement Index")
-    plt.ylabel("Height above Ellipsoid (m)")
-    plt.title("LLH (Virtual Station) Relative to Reference Ellipsoid")
+    plt.plot(utc_station_time, station_corrected_llh, label="Corrected LLH")
+    plt.xlabel("Time (UTC)")
+    plt.ylabel("Height above Ellipsoid (20GHz) [m]")
+    plt.title("LLH of Virtual Station Relative to Reference Ellipsoid")
     plt.grid(True)
     plt.legend()
     plt.tight_layout()
