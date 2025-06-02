@@ -1,10 +1,26 @@
+import os
+import re
 from netCDF4 import Dataset
 import numpy as np
 import matplotlib.pyplot as plt
 
 # === CONFIGURATION ===
-write_complete_cycle = True  # True = full orbit, False = Müggelsee and Virtual Station
+write_complete_cycle = False  # True = full orbit, False = Müggelsee and Virtual Station
 show_plots = False            # Toggle to control whether plots are shown
+
+# === DATA FOLDER ===
+base_dir = r"C:\Users\bruno\Documents\Sentinel-3A Data"
+
+def extract_start_time(folder_name):
+    match = re.search(r"_(\d{8}T\d{6})_", folder_name)
+    return match.group(1) if match else ""
+
+sen3_dirs = [
+    os.path.join(base_dir, d)
+    for d in os.listdir(base_dir)
+    if d.endswith(".SEN3") and os.path.isdir(os.path.join(base_dir, d))
+]
+sen3_dirs.sort(key=lambda x: extract_start_time(os.path.basename(x)))
 
 # === Müggelsee ===
 LATITUDE_MIN = 52.33
@@ -18,50 +34,102 @@ station_lon = (13.6435 + 13.6566) / 2
 # Define a small radius around the point
 station_delta = 0.01
 
-# === LOAD DATASET ===
-ds = Dataset(r"data\S3A_SR_2_LAN_HY_20160324T195805_20160324T203026_20230907T175812_1941_002_171______LN3_R_NT_005.SEN3\standard_measurement.nc")
-# print(ds.variables.keys())
-
 def get_variable(name):
     var = ds.variables[name][:]
     return var.filled(np.nan) if np.ma.isMaskedArray(var) else var
 
-# === LOAD LATITUDE AND LONGITUDE ===
-latitudes = get_variable("lat_20_ku")
-longitudes = get_variable("lon_20_ku")
-# === LOAD TIME VARIABLES ===
-time_1ghz = get_variable("time_01")
-time_20ghz = get_variable("time_20_ku")
-# === LOAD VARIABLES ===
-range_20ghz = get_variable("range_water_20_ku")
-wet_1ghz = get_variable("mod_wet_tropo_cor_meas_altitude_01")
-dry_1ghz = get_variable("mod_dry_tropo_cor_meas_altitude_01")
-iono_1ghz = get_variable("iono_cor_gim_01_ku")
-# === LOAD ALTITUDE AND TIDE CORRECTIONS ===
-altitude_20ghz = get_variable("alt_20_ku")  # altitude of the satellite above reference ellipsoid
-solid_earth_tide_1ghz = get_variable("solid_earth_tide_01")
-pole_tide_1ghz = get_variable("pole_tide_01")
-# === LOAD GEOID UNDULATION ===
-geoid_1ghz = get_variable("geoid_01")
+# === ACCUMULATORS ===
+all_latitudes = []
+all_longitudes = []
+all_time_20ghz = []
+all_range_20ghz = []
+all_wet_20ghz = []
+all_dry_20ghz = []
+all_iono_20ghz = []
+all_corrected_range = []
+all_altitude_20ghz = []
+all_solid_earth_tide = []
+all_pole_tide = []
+all_llh = []
+all_corrected_llh = []
+all_geoid = []
+all_orthometric_height = []
 
-# === INTERPOLATION FUNCTION (by time) ===
-def interpolate_to_20ghz_by_time(data_1ghz):
-    return np.interp(time_20ghz, time_1ghz, data_1ghz)
-# === INTERPOLATE to match 20GHz timestamps ===
-wet_20ghz = interpolate_to_20ghz_by_time(wet_1ghz)
-dry_20ghz = interpolate_to_20ghz_by_time(dry_1ghz)
-iono_20ghz = interpolate_to_20ghz_by_time(iono_1ghz)
-solid_earth_tide_20ghz = interpolate_to_20ghz_by_time(solid_earth_tide_1ghz)
-pole_tide_20ghz = interpolate_to_20ghz_by_time(pole_tide_1ghz)
-geoid_20ghz = interpolate_to_20ghz_by_time(geoid_1ghz)
+for sen3_folder in sen3_dirs:
+    print(f"Processing: {os.path.basename(sen3_folder)}")
+    nc_path = os.path.join(sen3_folder, "standard_measurement.nc")
+    if not os.path.isfile(nc_path):
+        print(f"Missing file in {sen3_folder}, skipping.")
+        continue
 
-# === CALCULATE CORRECTED RANGE ===
-corrected_range = range_20ghz + wet_20ghz + dry_20ghz + iono_20ghz
-# === CALCULATE LLH AND CORRECTED LLH ===
-llh = altitude_20ghz - corrected_range
-corrected_llh = llh - solid_earth_tide_20ghz - pole_tide_20ghz
-# === CALCULATE ORTHOMETRIC HEIGHT ===
-orthometric_height = corrected_llh - geoid_20ghz
+    ds = Dataset(nc_path)
+
+    def get_variable(name):
+        var = ds.variables[name][:]
+        return var.filled(np.nan) if np.ma.isMaskedArray(var) else var
+
+    latitudes = get_variable("lat_20_ku")
+    longitudes = get_variable("lon_20_ku")
+    time_1ghz = get_variable("time_01")
+    time_20ghz = get_variable("time_20_ku")
+
+    range_20ghz = get_variable("range_water_20_ku")
+    wet_1ghz = get_variable("mod_wet_tropo_cor_meas_altitude_01")
+    dry_1ghz = get_variable("mod_dry_tropo_cor_meas_altitude_01")
+    iono_1ghz = get_variable("iono_cor_gim_01_ku")
+
+    altitude_20ghz = get_variable("alt_20_ku")
+    solid_earth_tide_1ghz = get_variable("solid_earth_tide_01")
+    pole_tide_1ghz = get_variable("pole_tide_01")
+    geoid_1ghz = get_variable("geoid_01")
+
+    def interpolate(data): return np.interp(time_20ghz, time_1ghz, data)
+    wet_20ghz = interpolate(wet_1ghz)
+    dry_20ghz = interpolate(dry_1ghz)
+    iono_20ghz = interpolate(iono_1ghz)
+    solid_earth_tide_20ghz = interpolate(solid_earth_tide_1ghz)
+    pole_tide_20ghz = interpolate(pole_tide_1ghz)
+    geoid_20ghz = interpolate(geoid_1ghz)
+
+    corrected_range = range_20ghz + wet_20ghz + dry_20ghz + iono_20ghz
+    llh = altitude_20ghz - corrected_range
+    corrected_llh = llh - solid_earth_tide_20ghz - pole_tide_20ghz
+    orthometric_height = corrected_llh - geoid_20ghz
+
+    # === Append all data ===
+    all_latitudes.append(latitudes)
+    all_longitudes.append(longitudes)
+    all_time_20ghz.append(time_20ghz)
+    all_range_20ghz.append(range_20ghz)
+    all_wet_20ghz.append(wet_20ghz)
+    all_dry_20ghz.append(dry_20ghz)
+    all_iono_20ghz.append(iono_20ghz)
+    all_corrected_range.append(corrected_range)
+    all_altitude_20ghz.append(altitude_20ghz)
+    all_solid_earth_tide.append(solid_earth_tide_20ghz)
+    all_pole_tide.append(pole_tide_20ghz)
+    all_llh.append(llh)
+    all_corrected_llh.append(corrected_llh)
+    all_geoid.append(geoid_20ghz)
+    all_orthometric_height.append(orthometric_height)
+
+    ds.close()
+
+latitudes = np.concatenate(all_latitudes)
+longitudes = np.concatenate(all_longitudes)
+time_20ghz = np.concatenate(all_time_20ghz)
+range_20ghz = np.concatenate(all_range_20ghz)
+wet_20ghz = np.concatenate(all_wet_20ghz)
+dry_20ghz = np.concatenate(all_dry_20ghz)
+iono_20ghz = np.concatenate(all_iono_20ghz)
+corrected_range = np.concatenate(all_corrected_range)
+altitude_20ghz = np.concatenate(all_altitude_20ghz)
+solid_earth_tide_20ghz = np.concatenate(all_solid_earth_tide)
+pole_tide_20ghz = np.concatenate(all_pole_tide)
+llh = np.concatenate(all_llh)
+corrected_llh = np.concatenate(all_corrected_llh)
+geoid_20ghz = np.concatenate(all_geoid)
+orthometric_height = np.concatenate(all_orthometric_height)
 
 # === FILTER TO MÜGGELSEE AREA AND VIRTUAL STATION AREA ===
 if not write_complete_cycle:
@@ -139,11 +207,11 @@ if not write_complete_cycle:
 
 
 
-print("===== INFO =====")
-print(f"Print entire cycle: {write_complete_cycle}")
-print("Calculation finished, file generated.")
-print(f"{skipped_rng} Range values were skipped due to NaN.")
-print(f"{skipped_llh} LLH entries were skipped due to NaN.")
+print("\n===== INFO =====")
+print(f"Entire cycle: {write_complete_cycle}")
+print("Calculation finished")
+print(f"{skipped_rng} Range/LLH entries were skipped due to NaN.")
+# print(f"{skipped_llh} LLH entries were skipped due to NaN.")
 if not write_complete_cycle:
     print(f"{skipped_station} station entries skipped due to NaNs.\n")
 
