@@ -394,11 +394,11 @@ if not write_complete_cycle:
 
 
 # === CALCULATE AVERAGE CORRECTIONS ===
-valid_mask = ~np.isnan(wet_20ghz) & ~np.isnan(dry_20ghz) & ~np.isnan(iono_20ghz)
+atmospheric_valid_mask = ~np.isnan(wet_20ghz) & ~np.isnan(dry_20ghz) & ~np.isnan(iono_20ghz)
 
-wet_avg = np.nanmean(wet_20ghz[valid_mask])
-dry_avg = np.nanmean(dry_20ghz[valid_mask])
-iono_avg = np.nanmean(iono_20ghz[valid_mask])
+wet_avg = np.nanmean(wet_20ghz[atmospheric_valid_mask])
+dry_avg = np.nanmean(dry_20ghz[atmospheric_valid_mask])
+iono_avg = np.nanmean(iono_20ghz[atmospheric_valid_mask])
 total_avg_correction = wet_avg + dry_avg + iono_avg
 
 print("===== AVERAGE RANGE CORRECTIONS =====")
@@ -407,3 +407,16 @@ print(f"Dry Tropospheric Correction Avg:   {dry_avg:.4f} m")
 print(f"Ionospheric Correction Avg:        {iono_avg:.4f} m")
 print("------------------------------------------")
 print(f"Total Average Range Correction:    {total_avg_correction:.4f} m\n")
+
+
+
+print("===== TIDAL CORRECTIONS (MIN/MAX) =====")
+print(f"Solid Earth Tide Correction Min:   {np.min(solid_earth_tide_20ghz):.4f} m")
+print(f"Solid Earth Tide Correction Max:   {np.max(solid_earth_tide_20ghz):.4f} m")
+print(f"Pole Tide Correction Min:          {np.min(pole_tide_20ghz):.4f} m")
+print(f"Pole Tide Correction Max:          {np.max(pole_tide_20ghz):.4f} m")
+print("------------------------------------------\n")
+
+total_tide_20ghz = solid_earth_tide_20ghz + pole_tide_20ghz
+print(f"Total Tidal Correction Min:        {np.min(total_tide_20ghz):.4f} m")
+print(f"Total Tidal Correction Max:        {np.max(total_tide_20ghz):.4f} m")
