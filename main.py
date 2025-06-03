@@ -312,6 +312,72 @@ plt.legend()
 plt.tight_layout()
 save_and_optionally_show(fig, "orthometric_height")
 
+# === PLOT: Corrected Range over LATITUDE ===
+fig = plt.figure(figsize=(6, 4))
+plt.scatter(latitudes, corrected_range, s=5, label="Corrected Range")
+plt.xlabel("Latitude")
+plt.ylabel("Meters [m]")
+plt.title("Corrected Range over Latitude")
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
+save_and_optionally_show(fig, "lat_over_range")
+
+# === PLOT: Corrected Range over LONGITUDE ===
+fig = plt.figure(figsize=(6, 4))
+plt.scatter(longitudes, corrected_range, s=5, label="Corrected Range")
+plt.xlabel("Longitude")
+plt.ylabel("Meters [m]")
+plt.title("Corrected Range over Longitude")
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
+save_and_optionally_show(fig, "lon_over_range")
+
+# === PLOT: Corrected LLH over LATITUDE ===
+fig = plt.figure(figsize=(6, 4))
+plt.scatter(latitudes, corrected_llh, s=5, label="Corrected LLH")
+plt.xlabel("Latitude")
+plt.ylabel("Meters [m]")
+plt.title("Corrected LLH over Latitude")
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
+save_and_optionally_show(fig, "lat_over_llh")
+
+# === PLOT: Corrected LLH over LONGITUDE ===
+fig = plt.figure(figsize=(6, 4))
+plt.scatter(longitudes, corrected_llh, s=5, label="Corrected LLH")
+plt.xlabel("Longitude")
+plt.ylabel("Meters [m]")
+plt.title("Corrected LLH over Longitude")
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
+save_and_optionally_show(fig, "lon_over_llh")
+
+# === PLOT: Orthometric Height over LATITUDE ===
+fig = plt.figure(figsize=(6, 4))
+plt.scatter(latitudes, orthometric_height, s=5, label="Orthometric Height")
+plt.xlabel("Latitude")
+plt.ylabel("Meters [m]")
+plt.title("Orthometric Height over Latitude")
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
+save_and_optionally_show(fig, "lat_over_ortho")
+
+# === PLOT: Orthometric Height over LONGITUDE ===
+fig = plt.figure(figsize=(6, 4))
+plt.scatter(longitudes, orthometric_height, s=5, label="Orthometric Height")
+plt.xlabel("Longitude")
+plt.ylabel("Meters [m]")
+plt.title("Orthometric Height over Longitude")
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
+save_and_optionally_show(fig, "lon_over_ortho")
+
 if not write_complete_cycle:
     # === PLOT CORRECTED VIRTUAL STATION LLH ===
     fig = plt.figure(figsize=(6, 4))
