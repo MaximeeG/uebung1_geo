@@ -265,8 +265,8 @@ save_and_optionally_show(fig, "range_difference")
 fig = plt.figure(figsize=(6, 4))
 plt.gca().invert_yaxis()
 plt.plot(utc_time_20ghz, wet_20ghz+dry_20ghz+iono_20ghz, label="All Corrections", linestyle='dotted', color='black')
-plt.plot(utc_time_20ghz, dry_20ghz, label="Dry Tropospheric Correction", color='orange')
-plt.plot(utc_time_20ghz,wet_20ghz, label="Wet Tropospheric Correction", color='blue')
+plt.plot(utc_time_20ghz,wet_20ghz, label="Wet Tropospheric Correction")
+plt.plot(utc_time_20ghz, dry_20ghz, label="Dry Tropospheric Correction")
 plt.plot(utc_time_20ghz, iono_20ghz, label="Ionospheric Correction")
 plt.xlabel("Year")
 plt.ylabel("Correction (20GHz) [m]")
@@ -301,6 +301,23 @@ plt.grid(True)
 plt.tight_layout()
 save_and_optionally_show(fig, "tidal_corrections")
 
+# === PLOT ALL CORRECTIONS ===
+fig = plt.figure(figsize=(6, 4))
+plt.gca().invert_yaxis()
+plt.plot(utc_time_20ghz, wet_20ghz+dry_20ghz+iono_20ghz+solid_earth_tide_20ghz + pole_tide_20ghz, label="All Corrections", linestyle='dotted', color='black')
+plt.plot(utc_time_20ghz,wet_20ghz, label="Wet Tropospheric Correction")
+plt.plot(utc_time_20ghz, dry_20ghz, label="Dry Tropospheric Correction")
+plt.plot(utc_time_20ghz, iono_20ghz, label="Ionospheric Correction")
+plt.plot(utc_time_20ghz, solid_earth_tide_20ghz, label="Solid Earth Tide Correction")
+plt.plot(utc_time_20ghz, pole_tide_20ghz, label="Pole Tide Correction")
+plt.xlabel("Year")
+plt.ylabel("Correction (20GHz) [m]")
+plt.title("All Corrections")
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
+save_and_optionally_show(fig, "all_corrections")
+
 # === PLOT ORTHOMETRIC HEIGHT ===
 fig = plt.figure(figsize=(6, 4))
 plt.plot(utc_time_20ghz, orthometric_height, label="Orthometric Height")
@@ -312,46 +329,61 @@ plt.legend()
 plt.tight_layout()
 save_and_optionally_show(fig, "orthometric_height")
 
-# === PLOT: Corrected Range over LATITUDE ===
+# === YEAR-BASED COLORS ===
+# Extract years from UTC datetime list
+years = np.array([dt.year for dt in utc_time_20ghz])
+# Get sorted list of unique years
+unique_years = sorted(set(years))
+n_years = len(unique_years)
+
+# === PLOT: Corrected Range over LATITUDE with year-based colors ===
 fig = plt.figure(figsize=(6, 4))
-plt.scatter(latitudes, corrected_range, s=5, label="Corrected Range")
+for i, year in enumerate(unique_years):
+    year_mask = years == year
+    plt.scatter(latitudes[year_mask], corrected_range[year_mask], s=5, label=str(year))
 plt.xlabel("Latitude")
 plt.ylabel("Meters [m]")
-plt.title("Corrected Range over Latitude")
-plt.legend()
+plt.title("Corrected Range over Latitude by Year")
+plt.legend(title="Year")
 plt.grid(True)
 plt.tight_layout()
 save_and_optionally_show(fig, "lat_over_range")
 
-# === PLOT: Corrected Range over LONGITUDE ===
+# === PLOT: Corrected Range over LONGITUDE with year-based colors ===
 fig = plt.figure(figsize=(6, 4))
-plt.scatter(longitudes, corrected_range, s=5, label="Corrected Range")
+for i, year in enumerate(unique_years):
+    year_mask = years == year
+    plt.scatter(longitudes[year_mask], corrected_range[year_mask], s=5, label=str(year))
 plt.xlabel("Longitude")
 plt.ylabel("Meters [m]")
-plt.title("Corrected Range over Longitude")
-plt.legend()
+plt.title("Corrected Range over Longitude by Year")
+plt.legend(title="Year")
 plt.grid(True)
 plt.tight_layout()
 save_and_optionally_show(fig, "lon_over_range")
 
-# === PLOT: Corrected LLH over LATITUDE ===
+# === PLOT: Corrected LLH over LATITUDE with year-based colors ===
 fig = plt.figure(figsize=(6, 4))
-plt.scatter(latitudes, corrected_llh, s=5, label="Corrected LLH")
+for i, year in enumerate(unique_years):
+    year_mask = years == year
+    plt.scatter(latitudes[year_mask], corrected_llh[year_mask], s=5, label=str(year))
 plt.xlabel("Latitude")
 plt.ylabel("Meters [m]")
-plt.title("Corrected LLH over Latitude")
-plt.legend()
+plt.title("Corrected LLH over Latitude by Year")
+plt.legend(title="Year")
 plt.grid(True)
 plt.tight_layout()
 save_and_optionally_show(fig, "lat_over_llh")
 
-# === PLOT: Corrected LLH over LONGITUDE ===
+# === PLOT: Corrected LLH over LONGITUDE with year-based colors ===
 fig = plt.figure(figsize=(6, 4))
-plt.scatter(longitudes, corrected_llh, s=5, label="Corrected LLH")
+for i, year in enumerate(unique_years):
+    year_mask = years == year
+    plt.scatter(longitudes[year_mask], corrected_llh[year_mask], s=5, label=str(year))
 plt.xlabel("Longitude")
 plt.ylabel("Meters [m]")
-plt.title("Corrected LLH over Longitude")
-plt.legend()
+plt.title("Corrected LLH over Longitude by Year")
+plt.legend(title="Year")
 plt.grid(True)
 plt.tight_layout()
 save_and_optionally_show(fig, "lon_over_llh")
@@ -367,29 +399,31 @@ plt.grid(True)
 plt.tight_layout()
 save_and_optionally_show(fig, "lat_over_ortho")
 
-# === PLOT: Orthometric Height over LONGITUDE ===
+# === PLOT: Orthometric Height over LATITUDE with year-based colors ===
 fig = plt.figure(figsize=(6, 4))
-plt.scatter(longitudes, orthometric_height, s=5, label="Orthometric Height")
+for i, year in enumerate(unique_years):
+    year_mask = years == year
+    plt.scatter(latitudes[year_mask], orthometric_height[year_mask], s=5, label=str(year))
+plt.xlabel("Latitude")
+plt.ylabel("Meters [m]")
+plt.title("Orthometric Height over Latitude by Year")
+plt.legend(title="Year")
+plt.grid(True)
+plt.tight_layout()
+save_and_optionally_show(fig, "lat_over_ortho")
+
+# === PLOT: Orthometric Height over LONGITUDE with year-based colors ===
+fig = plt.figure(figsize=(6, 4))
+for i, year in enumerate(unique_years):
+    year_mask = years == year
+    plt.scatter(longitudes[year_mask], orthometric_height[year_mask], s=5, label=str(year))
 plt.xlabel("Longitude")
 plt.ylabel("Meters [m]")
-plt.title("Orthometric Height over Longitude")
-plt.legend()
+plt.title("Orthometric Height over Longitude by Year")
+plt.legend(title="Year")
 plt.grid(True)
 plt.tight_layout()
 save_and_optionally_show(fig, "lon_over_ortho")
-
-if not write_complete_cycle:
-    # === PLOT CORRECTED VIRTUAL STATION LLH ===
-    fig = plt.figure(figsize=(6, 4))
-    # plt.plot(station_llh, label="LLH")  # Uncomment if you want to include
-    plt.plot(utc_station_time, station_corrected_llh, label="Corrected LLH")
-    plt.xlabel("Year")
-    plt.ylabel("Height above Ellipsoid (20GHz) [m]")
-    plt.title("LLH of Virtual Station Relative to Reference Ellipsoid")
-    plt.grid(True)
-    plt.legend()
-    plt.tight_layout()
-    save_and_optionally_show(fig, "station_corrected_llh")
 
 
 
