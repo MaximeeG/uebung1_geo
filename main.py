@@ -25,13 +25,13 @@ sen3_dirs.sort(key=lambda x: extract_start_time(os.path.basename(x)))
 
 # === Müggelsee ===
 LATITUDE_MIN = 52.33
-LATITUDE_MAX = 52.47
+LATITUDE_MAX = 52.46
 LONGITUDE_MIN = 13.60
-LONGITUDE_MAX = 13.70
+LONGITUDE_MAX = 13.72
 
 # === Virtual Station ===
-station_lat = (52.4266 + 52.3996) / 2
-station_lon = (13.6435 + 13.6566) / 2
+station_lat = 52.40780973
+station_lon = 13.66564030
 # Define a small radius around the point
 station_delta = 0.01
 
