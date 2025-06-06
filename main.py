@@ -166,6 +166,9 @@ if not write_complete_cycle:
     station_llh = llh[station_mask]
     station_corrected_llh = corrected_llh[station_mask]
     station_ortho = orthometric_height[station_mask]
+    station_wet = wet_20ghz[station_mask]
+    station_dry = dry_20ghz[station_mask]
+    station_iono = iono_20ghz[station_mask]
     
     # === FILTER TO MÜGGELSEE AREA ===
     mueggelsee_mask = (  (latitudes >= LATITUDE_MIN) & (latitudes <= LATITUDE_MAX) &
@@ -415,6 +418,34 @@ if not write_complete_cycle:
     plot_filename = f"station_corrected_llh_trend_{active_station.lower()}"
     save_and_optionally_show(fig, plot_filename)
 
+    # === PLOT ATMOSPHERIC CORRECTIONS ===
+    fig = plt.figure(figsize=(6, 4))
+    plt.gca().invert_yaxis()
+    plt.plot(utc_station_time, station_wet+station_dry+station_iono, label="All Corrections", linestyle='dotted', color='black')
+    plt.plot(utc_station_time, station_wet, label="Wet Tropospheric Correction")
+    plt.plot(utc_station_time, station_dry, label="Dry Tropospheric Correction")
+    plt.plot(utc_station_time, station_iono, label="Ionospheric Correction")
+    plt.xlabel("Year")
+    plt.ylabel("Correction (20GHz) [m]")
+    plt.title("Atmospheric Corrections")
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    plot_filename = f"station_atmospheric_corrections{active_station.lower()}"
+    save_and_optionally_show(fig, plot_filename)
+
+    # === PLOT WET TROPOSPHERIC CORRECTIONS ===
+    fig = plt.figure(figsize=(6, 4))
+    plt.gca().invert_yaxis()
+    plt.plot(utc_station_time, station_wet, label="Wet Tropospheric Correction")
+    plt.xlabel("Year")
+    plt.ylabel("Correction (20GHz) [m]")
+    plt.title("Wet Tropospheric Correction")
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    plot_filename = f"station_wet_tropospheric_corrections{active_station.lower()}"
+    save_and_optionally_show(fig, plot_filename)
 
 
 # === YEAR-BASED COLORS ===
@@ -423,6 +454,10 @@ years = np.array([dt.year for dt in utc_time_20ghz])
 # Get sorted list of unique years
 unique_years = sorted(set(years))
 n_years = len(unique_years)
+# Virtual Station
+station_years = np.array([dt.year for dt in utc_station_time])
+station_unique_years = sorted(set(station_years))
+station_n_years = len(station_unique_years)
 
 # === PLOT: Corrected Range over LATITUDE with year-based colors ===
 fig, ax = plt.subplots(figsize=(6, 4))
