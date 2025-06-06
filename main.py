@@ -9,6 +9,9 @@ from datetime import datetime, timedelta
 write_complete_cycle = False  # True = full orbit, False = Müggelsee and Virtual Station
 show_plots = False            # Toggle to control whether plots are shown
 
+# Set the active station here by name
+active_station = "Müggelsee"  # set to "Müggelsee" or "Seddinsee" to toggle
+
 # === DATA FOLDER ===
 base_dir = r"C:\Users\bruno\Documents\Sentinel-3A Data"
 
@@ -29,9 +32,21 @@ LATITUDE_MAX = 52.46
 LONGITUDE_MIN = 13.60
 LONGITUDE_MAX = 13.72
 
-# === Virtual Station ===
-station_lat = 52.40780973
-station_lon = 13.66564030
+# === Virtual Station Toggle ===
+# Define coordinates for each station
+stations = {
+    "Müggelsee": {"lat": 52.43707753, "lon": 13.63808564},
+    "Seddinsee": {"lat": 52.37980552, "lon": 13.66594039}
+}
+
+# Apply coordinates from selected station
+station_lat = stations[active_station]["lat"]
+station_lon = stations[active_station]["lon"]
+station_delta = 0.01
+
+# For debug or confirmation
+print(f"Active Virtual Station: {active_station}")
+
 # Define a small radius around the point
 station_delta = 0.01
 
@@ -193,7 +208,8 @@ with open(llh_ortho_csv_name, "w") as f_llh_ortho:
 
 if not write_complete_cycle:
     # === EXPORT STATION DATA TO CSV ===
-    with open("station.csv", "w") as f_station:
+    filename = f"station_{active_station.lower()}.csv"
+    with open(filename, "w") as f_station:
         f_station.write("Time,Latitude,Longitude,Range,CorrectedRange,LLH,CorrectedLLH,OrthometricHeight\n")
         skipped_station = 0
         for t, lat, lon, rng, corr_rng, h, corr_h, ortho in zip(
@@ -328,6 +344,21 @@ plt.grid(True)
 plt.legend()
 plt.tight_layout()
 save_and_optionally_show(fig, "orthometric_height")
+
+if not write_complete_cycle:
+    # === PLOT CORRECTED VIRTUAL STATION LLH ===
+    fig = plt.figure(figsize=(6, 4))
+    # plt.plot(station_llh, label="LLH")  # Uncomment if you want to include
+    plt.plot(utc_station_time, station_corrected_llh, label="Corrected LLH")
+    plt.xlabel("Year")
+    plt.ylabel("Height above Ellipsoid (20GHz) [m]")
+    plt.title("LLH of Virtual Station Relative to Reference Ellipsoid")
+    plt.grid(True)
+    plt.legend()
+    plt.tight_layout()
+    plot_filename = f"station_corrected_llh_{active_station.lower()}"
+    save_and_optionally_show(fig, plot_filename)
+
 
 # === YEAR-BASED COLORS ===
 # Extract years from UTC datetime list
