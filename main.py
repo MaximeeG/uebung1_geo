@@ -26,7 +26,7 @@ sen3_dirs = [
 ]
 sen3_dirs.sort(key=lambda x: extract_start_time(os.path.basename(x)))
 
-# === Müggelsee ===
+# === Area ===
 LATITUDE_MIN = 52.33
 LATITUDE_MAX = 52.46
 LONGITUDE_MIN = 13.60
@@ -312,7 +312,7 @@ plt.plot(utc_time_20ghz, pole_tide_20ghz, label="Pole Tide Correction")
 plt.xlabel("Year")
 plt.ylabel("Correction (20GHz) [m]")
 plt.title("Tidal Corrections")
-plt.legend()
+plt.legend(fontsize=5)
 plt.grid(True)
 plt.tight_layout()
 save_and_optionally_show(fig, "tidal_corrections")
@@ -360,6 +360,7 @@ if not write_complete_cycle:
     save_and_optionally_show(fig, plot_filename)
 
 
+
 # === YEAR-BASED COLORS ===
 # Extract years from UTC datetime list
 years = np.array([dt.year for dt in utc_time_20ghz])
@@ -368,92 +369,99 @@ unique_years = sorted(set(years))
 n_years = len(unique_years)
 
 # === PLOT: Corrected Range over LATITUDE with year-based colors ===
-fig = plt.figure(figsize=(6, 4))
+fig, ax = plt.subplots(figsize=(6, 4))
 for i, year in enumerate(unique_years):
     year_mask = years == year
-    plt.scatter(latitudes[year_mask], corrected_range[year_mask], s=5, label=str(year))
-plt.xlabel("Latitude")
-plt.ylabel("Meters [m]")
-plt.title("Corrected Range over Latitude by Year")
-plt.legend(title="Year")
-plt.grid(True)
-plt.tight_layout()
+    ax.scatter(latitudes[year_mask], corrected_range[year_mask], s=5, label=str(year))
+# Add lake area marker
+for name, coords in stations.items():
+    ax.axvspan(coords["lat"] - station_delta, coords["lat"] + station_delta, alpha=0.2, label=f"{name} Area")
+ax.set_xlabel("Latitude")
+ax.set_ylabel("Meters [m]")
+ax.set_title("Corrected Range over Latitude by Year")
+ax.legend(title="Year", fontsize=5)
+ax.grid(True)
+fig.tight_layout()
 save_and_optionally_show(fig, "lat_over_range")
 
 # === PLOT: Corrected Range over LONGITUDE with year-based colors ===
-fig = plt.figure(figsize=(6, 4))
-for i, year in enumerate(unique_years):
+fig, ax = plt.subplots(figsize=(6, 4))
+for year in unique_years:
     year_mask = years == year
-    plt.scatter(longitudes[year_mask], corrected_range[year_mask], s=5, label=str(year))
-plt.xlabel("Longitude")
-plt.ylabel("Meters [m]")
-plt.title("Corrected Range over Longitude by Year")
-plt.legend(title="Year")
-plt.grid(True)
-plt.tight_layout()
+    ax.scatter(longitudes[year_mask], corrected_range[year_mask], s=5, label=str(year))
+# Add lake area marker
+for name, coords in stations.items():
+    ax.axvspan(coords["lon"] - station_delta, coords["lon"] + station_delta, alpha=0.2, label=f"{name} Area")
+ax.set_xlabel("Longitude")
+ax.set_ylabel("Meters [m]")
+ax.set_title("Corrected Range over Longitude by Year")
+ax.legend(title="Year", fontsize=5)
+ax.grid(True)
+fig.tight_layout()
 save_and_optionally_show(fig, "lon_over_range")
 
 # === PLOT: Corrected LLH over LATITUDE with year-based colors ===
-fig = plt.figure(figsize=(6, 4))
-for i, year in enumerate(unique_years):
+fig, ax = plt.subplots(figsize=(6, 4))
+for year in unique_years:
     year_mask = years == year
-    plt.scatter(latitudes[year_mask], corrected_llh[year_mask], s=5, label=str(year))
-plt.xlabel("Latitude")
-plt.ylabel("Meters [m]")
-plt.title("Corrected LLH over Latitude by Year")
-plt.legend(title="Year")
-plt.grid(True)
-plt.tight_layout()
+    ax.scatter(latitudes[year_mask], corrected_llh[year_mask], s=5, label=str(year))
+# Add lake area marker
+for name, coords in stations.items():
+    ax.axvspan(coords["lat"] - station_delta, coords["lat"] + station_delta, alpha=0.2, label=f"{name} Area")
+ax.set_xlabel("Latitude")
+ax.set_ylabel("Meters [m]")
+ax.set_title("Corrected LLH over Latitude by Year")
+ax.legend(title="Year", fontsize=5)
+ax.grid(True)
+fig.tight_layout()
 save_and_optionally_show(fig, "lat_over_llh")
 
 # === PLOT: Corrected LLH over LONGITUDE with year-based colors ===
-fig = plt.figure(figsize=(6, 4))
-for i, year in enumerate(unique_years):
+fig, ax = plt.subplots(figsize=(6, 4))
+for year in unique_years:
     year_mask = years == year
-    plt.scatter(longitudes[year_mask], corrected_llh[year_mask], s=5, label=str(year))
-plt.xlabel("Longitude")
-plt.ylabel("Meters [m]")
-plt.title("Corrected LLH over Longitude by Year")
-plt.legend(title="Year")
-plt.grid(True)
-plt.tight_layout()
+    ax.scatter(longitudes[year_mask], corrected_llh[year_mask], s=5, label=str(year))
+# Add lake area marker
+for name, coords in stations.items():
+    ax.axvspan(coords["lon"] - station_delta, coords["lon"] + station_delta, alpha=0.2, label=f"{name} Area")
+ax.set_xlabel("Longitude")
+ax.set_ylabel("Meters [m]")
+ax.set_title("Corrected LLH over Longitude by Year")
+ax.legend(title="Year", fontsize=5)
+ax.grid(True)
+fig.tight_layout()
 save_and_optionally_show(fig, "lon_over_llh")
 
-# === PLOT: Orthometric Height over LATITUDE ===
-fig = plt.figure(figsize=(6, 4))
-plt.scatter(latitudes, orthometric_height, s=5, label="Orthometric Height")
-plt.xlabel("Latitude")
-plt.ylabel("Meters [m]")
-plt.title("Orthometric Height over Latitude")
-plt.legend()
-plt.grid(True)
-plt.tight_layout()
-save_and_optionally_show(fig, "lat_over_ortho")
-
 # === PLOT: Orthometric Height over LATITUDE with year-based colors ===
-fig = plt.figure(figsize=(6, 4))
-for i, year in enumerate(unique_years):
+fig, ax = plt.subplots(figsize=(6, 4))
+for year in unique_years:
     year_mask = years == year
-    plt.scatter(latitudes[year_mask], orthometric_height[year_mask], s=5, label=str(year))
-plt.xlabel("Latitude")
-plt.ylabel("Meters [m]")
-plt.title("Orthometric Height over Latitude by Year")
-plt.legend(title="Year")
-plt.grid(True)
-plt.tight_layout()
+    ax.scatter(latitudes[year_mask], orthometric_height[year_mask], s=5, label=str(year))
+# Add lake area marker
+for name, coords in stations.items():
+    ax.axvspan(coords["lat"] - station_delta, coords["lat"] + station_delta, alpha=0.2, label=f"{name} Area")
+ax.set_xlabel("Latitude")
+ax.set_ylabel("Meters [m]")
+ax.set_title("Orthometric Height over Latitude by Year")
+ax.legend(title="Year", fontsize=5)
+ax.grid(True)
+fig.tight_layout()
 save_and_optionally_show(fig, "lat_over_ortho")
 
 # === PLOT: Orthometric Height over LONGITUDE with year-based colors ===
-fig = plt.figure(figsize=(6, 4))
-for i, year in enumerate(unique_years):
+fig, ax = plt.subplots(figsize=(6, 4))
+for year in unique_years:
     year_mask = years == year
-    plt.scatter(longitudes[year_mask], orthometric_height[year_mask], s=5, label=str(year))
-plt.xlabel("Longitude")
-plt.ylabel("Meters [m]")
-plt.title("Orthometric Height over Longitude by Year")
-plt.legend(title="Year")
-plt.grid(True)
-plt.tight_layout()
+    ax.scatter(longitudes[year_mask], orthometric_height[year_mask], s=5, label=str(year))
+# Add lake area marker
+for name, coords in stations.items():
+    ax.axvspan(coords["lon"] - station_delta, coords["lon"] + station_delta, alpha=0.2, label=f"{name} Area")
+ax.set_xlabel("Longitude")
+ax.set_ylabel("Meters [m]")
+ax.set_title("Orthometric Height over Longitude by Year")
+ax.legend(title="Year", fontsize=5)
+ax.grid(True)
+fig.tight_layout()
 save_and_optionally_show(fig, "lon_over_ortho")
 
 
