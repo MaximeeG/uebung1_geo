@@ -3,7 +3,9 @@ import re
 from netCDF4 import Dataset
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
 from datetime import datetime, timedelta
+from statsmodels.nonparametric.smoothers_lowess import lowess
 
 # === CONFIGURATION ===
 write_complete_cycle = False  # True = full orbit, False = Müggelsee and Virtual Station
@@ -257,10 +259,15 @@ utc_station_time = tai_to_utc(station_time)
 fig = plt.figure(figsize=(6, 4))
 plt.plot(utc_time_20ghz, range_20ghz, label="Original Range")
 plt.plot(utc_time_20ghz, corrected_range, label="Corrected Range", linestyle="--")
+# Add LOWESS smoothing
+x_numeric = mdates.date2num(utc_time_20ghz)
+trend = lowess(corrected_range, x_numeric, frac=0.1)
+trend_dates = mdates.num2date(trend[:, 0])
+plt.plot(trend_dates, trend[:, 1], label="Corrected Range Trend", color='black')
 plt.xlabel("Year")
 plt.ylabel("Range (20GHz) [m]")
 plt.title("Original vs. Corrected Range")
-plt.legend()
+plt.legend(fontsize=5)
 plt.grid(True)
 plt.tight_layout()
 save_and_optionally_show(fig, "range_original_vs_corrected")
@@ -269,6 +276,11 @@ save_and_optionally_show(fig, "range_original_vs_corrected")
 range_diff = range_20ghz - corrected_range
 fig = plt.figure(figsize=(6, 4))
 plt.plot(utc_time_20ghz, range_diff, label="Difference: Original - Corrected")
+# Add LOWESS smoothing
+x_numeric = mdates.date2num(utc_time_20ghz)
+trend = lowess(range_diff, x_numeric, frac=0.1)
+trend_dates = mdates.num2date(trend[:, 0])
+plt.plot(trend_dates, trend[:, 1], label="Trend", color='black')
 plt.xlabel("Year")
 plt.ylabel("Range Difference (20GHz) [m]")
 plt.title("Difference Between Original and Corrected Range")
@@ -292,10 +304,15 @@ plt.grid(True)
 plt.tight_layout()
 save_and_optionally_show(fig, "atmospheric_corrections")
 
-# === PLOT LLH vs. CORRECTED ===
+# === PLOT LLH CORRECTED ===
 fig = plt.figure(figsize=(6, 4))
 # plt.plot(llh, label="LLH")  # Uncomment if you want to include
 plt.plot(utc_time_20ghz, corrected_llh, label="Corrected LLH")
+# Add LOWESS smoothing
+x_numeric = mdates.date2num(utc_time_20ghz)
+trend = lowess(corrected_llh, x_numeric, frac=0.025)
+trend_dates = mdates.num2date(trend[:, 0])
+plt.plot(trend_dates, trend[:, 1], label="Trend", color='black')
 plt.xlabel("Year")
 plt.ylabel("Height above Ellipsoid (20GHz) [m]")
 plt.title("LLH Relative to Reference Ellipsoid")
@@ -303,6 +320,20 @@ plt.grid(True)
 plt.legend()
 plt.tight_layout()
 save_and_optionally_show(fig, "corrected_llh")
+
+# === PLOT LLH CORRECTED TREND ===
+fig = plt.figure(figsize=(6, 4))
+x_numeric = mdates.date2num(utc_time_20ghz)
+trend = lowess(corrected_llh, x_numeric, frac=0.025)
+trend_dates = mdates.num2date(trend[:, 0])
+plt.plot(trend_dates, trend[:, 1], label="Trend", color='black')
+plt.xlabel("Year")
+plt.ylabel("Height above Ellipsoid (20GHz) [m]")
+plt.title("LLH Relative to Reference Ellipsoid")
+plt.grid(True)
+plt.legend()
+plt.tight_layout()
+save_and_optionally_show(fig, "corrected_llh_trend")
 
 # === PLOT TIDAL CORRECTIONS ===
 fig = plt.figure(figsize=(6, 4))
@@ -337,6 +368,11 @@ save_and_optionally_show(fig, "all_corrections")
 # === PLOT ORTHOMETRIC HEIGHT ===
 fig = plt.figure(figsize=(6, 4))
 plt.plot(utc_time_20ghz, orthometric_height, label="Orthometric Height")
+# Add LOWESS smoothing
+x_numeric = mdates.date2num(utc_time_20ghz)
+trend = lowess(orthometric_height, x_numeric, frac=0.025)
+trend_dates = mdates.num2date(trend[:, 0])
+plt.plot(trend_dates, trend[:, 1], label="Trend", color='black')
 plt.xlabel("Year")
 plt.ylabel("Orthometric Height (20GHz) [m]")
 plt.title("Orthometric Height")
@@ -350,6 +386,11 @@ if not write_complete_cycle:
     fig = plt.figure(figsize=(6, 4))
     # plt.plot(station_llh, label="LLH")  # Uncomment if you want to include
     plt.plot(utc_station_time, station_corrected_llh, label="Corrected LLH")
+    # Add LOWESS smoothing
+    x_numeric = mdates.date2num(utc_station_time)
+    trend = lowess(station_corrected_llh, x_numeric, frac=0.1)
+    trend_dates = mdates.num2date(trend[:, 0])
+    plt.plot(trend_dates, trend[:, 1], label="Trend", color='black')
     plt.xlabel("Year")
     plt.ylabel("Height above Ellipsoid (20GHz) [m]")
     plt.title("LLH of Virtual Station Relative to Reference Ellipsoid")
@@ -357,6 +398,21 @@ if not write_complete_cycle:
     plt.legend()
     plt.tight_layout()
     plot_filename = f"station_corrected_llh_{active_station.lower()}"
+    save_and_optionally_show(fig, plot_filename)
+
+    # === PLOT CORRECTED VIRTUAL STATION LLH Trend ===
+    fig = plt.figure(figsize=(6, 4))
+    x_numeric = mdates.date2num(utc_station_time)
+    trend = lowess(station_corrected_llh, x_numeric, frac=0.1)
+    trend_dates = mdates.num2date(trend[:, 0])
+    plt.plot(trend_dates, trend[:, 1], label="Trend", color='black')
+    plt.xlabel("Year")
+    plt.ylabel("Height above Ellipsoid (20GHz) [m]")
+    plt.title("LLH of Virtual Station Relative to Reference Ellipsoid")
+    plt.grid(True)
+    plt.legend()
+    plt.tight_layout()
+    plot_filename = f"station_corrected_llh_trend_{active_station.lower()}"
     save_and_optionally_show(fig, plot_filename)
 
 
